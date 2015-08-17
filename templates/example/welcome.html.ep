@@ -1,0 +1,196 @@
+% layout 'default';
+<div class="main-container">
+ <section class="image-bg overlay bg-primary">
+    <div class="background-image-holder">
+        <img alt="Background Image" class="background-image" src="img/home-ph.png">
+    </div>
+    <div class="container pt80">
+        <div class="row mb24 mb-xs-0">
+            <div class="col-sm-12 text-center">
+                <h1 class="mb16"><strong>Hey asshole</strong>, who gave you a license?</h1>
+                <p class="lead">
+                    Finally, a platform for yelling at bad drivers, and thanking those who deserve it.
+                </p>
+            </div>
+        </div>
+        <!--end of row-->
+        <div class="row mb80 mb-xs-24">
+            <div class="col-sm-10 col-sm-offset-1">
+                <form class="form-newsletter thirds" data-success="Thanks for your registration, we will be in touch shortly." data-error="Please fill all fields correctly.">
+                    <input type="text" name="email" class="validate-email validate-required  signup-email-field" placeholder="License" />
+                    <select>
+                        <option selected="" value="Default">Select a State</option>
+                        <option value="Alabama">Alabama</option>
+                        <option value="Alaska">Alaska</option>
+                        <option value="Arizona">Arizona</option>
+                        <option value="Arkansas">Arkansas</option>
+                        <option value="California">California</option>
+                        <option value="Colorado">Colorado</option>
+                        <option value="Connecticut">Connecticut</option>
+                        <option value="Delaware">Delaware</option>
+                        <option value="District of Columbia">District of Columbia</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Hawaii">Hawaii</option>
+                        <option value="Idaho">Idaho</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="Indiana">Indiana</option>
+                        <option value="Iowa">Iowa</option>
+                        <option value="Kansas">Kansas</option>
+                        <option value="Kentucky">Kentucky</option>
+                        <option value="Louisiana">Louisiana</option>
+                        <option value="Maine">Maine</option>
+                        <option value="Maryland">Maryland</option>
+                        <option value="Massachusetts">Massachusetts</option>
+                        <option value="Michigan">Michigan</option>
+                        <option value="Minnesota">Minnesota</option>
+                        <option value="Mississippi">Mississippi</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="Montana">Montana</option>
+                        <option value="Nebraska">Nebraska</option>
+                        <option value="Nevada">Nevada</option>
+                        <option value="New Hampshire">New Hampshire</option>
+                        <option value="New Jersey">New Jersey</option>
+                        <option value="New Mexico">New Mexico</option>
+                        <option value="New York">New York</option>
+                        <option value="North Carolina">North Carolina</option>
+                        <option value="North Dakota">North Dakota</option>
+                        <option value="Ohio">Ohio</option>
+                        <option value="Oklahoma">Oklahoma</option>
+                        <option value="Oregon">Oregon</option>
+                        <option value="Pennsylvania">Pennsylvania</option>
+                        <option value="Rhode Island">Rhode Island</option>
+                        <option value="South Carolina">South Carolina</option>
+                        <option value="South Dakota">South Dakota</option>
+                        <option value="Tennessee">Tennessee</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Utah">Utah</option>
+                        <option value="Vermont">Vermont</option>
+                        <option value="Virginia">Virginia</option>
+                        <option value="Washington">Washington</option>
+                        <option value="West Virginia">West Virginia</option>
+                        <option value="Wisconsin">Wisconsin</option>
+                        <option value="Wyoming">Wyoming</option>
+                    </select>
+                    <input type="submit" class="btn-white btn-tropical" value="Go" />
+                </form>
+            </div>
+        </div>
+        <!--end of row-->
+    </div>
+    <!--end of container-->
+</section>
+<section class="bg-secondary pt120 pb120 pt-xs-40 pb-xs-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-md-offset-2">
+                <div class="feature feature-3 mb64 mb-xs-24">
+                    <div class="left">
+                        <i class="ti-announcement icon-sm"></i>
+                    </div>
+                    <div class="right">
+                        <h4 class="mb16">Yell at Them</h4>
+                        <p>
+                            Has some asshole just cut you off then slam on their brakes? The finger is so passé. Now's your chance to finally say to them what you'd really like to say.
+                        </p>
+                    </div>
+                </div>
+                <!--end of feature-->
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="feature feature-3 mb64 mb-xs-24">
+                    <div class="left">
+                        <i class="ti-heart icon-sm"></i>
+                    </div>
+                    <div class="right">
+                        <h4 class="mb16">Show Them Love</h4>
+                        <p>
+                            Did some awesome person let you in, but didn't notice when you did the wave? Show them some love. Let them know they are a great driver with a positive review.
+                        </p>
+                    </div>
+                </div>
+                <!--end of feature-->
+            </div>
+            <div class="col-sm-6 col-md-4 col-md-offset-2">
+                <div class="feature feature-3 mb-xs-24">
+                    <div class="left">
+                        <i class="ti-crown icon-sm"></i>
+                    </div>
+                    <div class="right">
+                        <h4 class="mb16">Rise in the Ranks</h4>
+                        <p>
+                            Don't just say you're a good driver, prove it. Every positive review pushes your rankings higher. Every negative review pushes you lower. Get into the top leaderboard for your city, maybe even your state.
+                        </p>
+                    </div>
+                </div>
+                <!--end of feature-->
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="feature feature-3">
+                    <div class="left">
+                        <i class="ti-comment-alt icon-sm"></i>
+                    </div>
+                    <div class="right">
+                        <h4 class="mb16">Get the Deets</h4>
+                        <p>
+                            Check out what other people think about a driver. Sign up for an account and you will be notified when someone says something about you.
+                        </p>
+                    </div>
+                </div>
+                <!--end of feature-->
+            </div>
+        </div>
+        <!--end of row-->
+    </div>
+    <!--end of container-->
+</section>
+<section class="image-bg overlay">
+    <div class="background-image-holder">
+        <img alt="Background Image" class="background-image" src="img/home2.jpg">
+    </div>
+    <div class="container">
+        <div class="row mb64 mb-xs-24">
+            <div class="col-md-10 col-md-offset-1 col-sm-12 text-center">
+                <h3>Check out some recent reviews</h3>
+            </div>
+        </div>
+        <!--end of row-->
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <div class="feature boxed cast-shadow-light">
+                    <img alt="Pic" class="image-small inline-block mb24" src="img/avatar1.png" />
+                    <h4>"Polished, Incredible!"</h4>
+                    <p>
+                        It's clear to see just how seriously these guys take design. I've never come across a template with the level of polish as this!
+                    </p>
+                    <span>
+                        <strong>Anne Potter</strong> - via Envato</span>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div class="feature boxed cast-shadow-light">
+                    <img alt="Pic" class="image-small inline-block mb24" src="img/avatar2.png" />
+                    <h4>"Customer For Life"</h4>
+                    <p>
+                        I love the ease-of-use the builder provides - I can quickly test different combinations and experiment with font and color combinations to find that sweet spot.
+                    </p>
+                    <span>
+                        <strong>Jake Sims</strong> - via Twitter</span>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div class="feature boxed cast-shadow-light">
+                    <img alt="Pic" class="image-small inline-block mb24" src="img/avatar3.png" />
+                    <h4>"Almost too easy!"</h4>
+                    <p>
+                        As a seasoned template user, I really appreciate the consistent styling for all common tags, it makes customising the sections that much easier.
+                    </p>
+                    <span>
+                        <strong>Larry Smith</strong> - via Envato</span>
+                </div>
+            </div>
+        </div>
+        <!--end of row-->
+    </div>
+    <!--end of container-->
+</section>

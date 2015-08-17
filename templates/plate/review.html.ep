@@ -1,0 +1,179 @@
+% layout 'default';
+
+<div class="main-container">
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-5">
+                            <h4 class="uppercase">Things to Consider</h4>
+                            <p>
+                                Consider the fact that there's a human on the other end of your review, and, as humans, we are all prone to make mistakes now and then--even while driving unfortunately.
+                            </p>
+                            <hr>
+                            <p>
+                                Consider that if they do happen to see your review, often a gentle word of advice is taken much better than harsh words. In fact, your harsh words may only encourage them; whereas they may listen to what you're saying if it's kind.
+                            </p>
+                            <hr>
+                            <p>
+                                Consider that some people just need to be told to fuck off, find a nice hole, crawl in it and die (e.g., the asshole who drives down your resedential area like they're actually trying to kill someone).
+                            </p>
+                        </div>
+                        <div class="col-sm-6 col-md-5 col-md-offset-1">
+                            <h4 class="uppercase" style="text-align:center;">Leave a Review</h4>
+                            %= form_for 'review', class => 'form', id => 'review', 'data-success' => "Thanks for your submission.", => 'data-error' => "Please fill all fields correctly" => (method => 'post') => begin
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div class="thirds">
+                                        <div class="radio-option">
+                                            <div class="inner-pos"></div>
+                                            <input name="revtype" value="positive" type="radio">
+                                        </div>
+                                        <label for="radio">Positive</label>
+                                        <div class="radio-option">
+                                            <div class="inner-neg"></div>
+                                            <input name="revtype" value="negative" type="radio">
+                                        </div>
+                                        <label for="radio2">Negative</label>
+                                        <div class="radio-option">
+                                            <div class="inner-neu"></div>
+                                            <input name="revtype" value="neutral" type="radio">
+                                        </div>
+                                        <label for="radio2">Neutral</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12" style="padding-left:0">
+                                <div class="input-with-label text-left">
+                                    <span>Plate Info</span>
+                                </div>
+                                </div>
+                                <div class="halves">
+                                    <div class="select-option">
+                                        <i class="ti-angle-down"></i>
+                                        <select name="platestate">
+                                            <option selected="" value="Default">Select a State</option>
+                                            <option value="alabama">Alabama</option>
+                                            <option value="alaska">Alaska</option>
+                                            <option value="arizona">Arizona</option>
+                                            <option value="arkansas">Arkansas</option>
+                                            <option value="california">California</option>
+                                            <option value="colorado">Colorado</option>
+                                            <option value="connecticut">Connecticut</option>
+                                            <option value="delaware">Delaware</option>
+                                            <option value="district-of-columbia">District of Columbia</option>
+                                            <option value="florida">Florida</option>
+                                            <option value="georgia">Georgia</option>
+                                            <option value="hawaii">Hawaii</option>
+                                            <option value="idaho">Idaho</option>
+                                            <option value="illinois">Illinois</option>
+                                            <option value="indiana">Indiana</option>
+                                            <option value="iowa">Iowa</option>
+                                            <option value="kansas">Kansas</option>
+                                            <option value="kentucky">Kentucky</option>
+                                            <option value="louisiana">Louisiana</option>
+                                            <option value="maine">Maine</option>
+                                            <option value="maryland">Maryland</option>
+                                            <option value="massachusetts">Massachusetts</option>
+                                            <option value="michigan">Michigan</option>
+                                            <option value="minnesota">Minnesota</option>
+                                            <option value="mississippi">Mississippi</option>
+                                            <option value="missouri">Missouri</option>
+                                            <option value="montana">Montana</option>
+                                            <option value="nebraska">Nebraska</option>
+                                            <option value="nevada">Nevada</option>
+                                            <option value="new-hampshire">New Hampshire</option>
+                                            <option value="new-jersey">New Jersey</option>
+                                            <option value="new-mexico">New Mexico</option>
+                                            <option value="new-york">New York</option>
+                                            <option value="north-carolina">North Carolina</option>
+                                            <option value="north-dakota">North Dakota</option>
+                                            <option value="ohio">Ohio</option>
+                                            <option value="oklahoma">Oklahoma</option>
+                                            <option value="oregon">Oregon</option>
+                                            <option value="pennsylvania">Pennsylvania</option>
+                                            <option value="rhode-island">Rhode Island</option>
+                                            <option value="south-carolina">South Carolina</option>
+                                            <option value="south-dakota">South Dakota</option>
+                                            <option value="tennessee">Tennessee</option>
+                                            <option value="texas">Texas</option>
+                                            <option value="utah">Utah</option>
+                                            <option value="vermont">Vermont</option>
+                                            <option value="virginia">Virginia</option>
+                                            <option value="washington">Washington</option>
+                                            <option value="west-virginia">West Virginia</option>
+                                            <option value="wisconsin">Wisconsin</option>
+                                            <option value="wyoming">Wyoming</option>
+                                        </select>
+                                    </div>
+                                    <input type="text" name="platenum" class="validate-required  signup-email-field" placeholder="License" />
+                                </div>
+                                <div class="input-with-label text-left">
+                                    <span>Where Did it Happen?</span>
+                                </div>
+                                <div class="halves">
+                                    <div class="select-option">
+                                        <i class="ti-angle-down"></i>
+                                        <select name="wherestate">
+                                            <option selected="" value="Default">Select a State</option>
+                                            <option value="alabama">Alabama</option>
+                                            <option value="alaska">Alaska</option>
+                                            <option value="arizona">Arizona</option>
+                                            <option value="arkansas">Arkansas</option>
+                                            <option value="california">California</option>
+                                            <option value="colorado">Colorado</option>
+                                            <option value="connecticut">Connecticut</option>
+                                            <option value="delaware">Delaware</option>
+                                            <option value="district-of-columbia">District of Columbia</option>
+                                            <option value="florida">Florida</option>
+                                            <option value="georgia">Georgia</option>
+                                            <option value="hawaii">Hawaii</option>
+                                            <option value="idaho">Idaho</option>
+                                            <option value="illinois">Illinois</option>
+                                            <option value="indiana">Indiana</option>
+                                            <option value="iowa">Iowa</option>
+                                            <option value="kansas">Kansas</option>
+                                            <option value="kentucky">Kentucky</option>
+                                            <option value="louisiana">Louisiana</option>
+                                            <option value="maine">Maine</option>
+                                            <option value="maryland">Maryland</option>
+                                            <option value="massachusetts">Massachusetts</option>
+                                            <option value="michigan">Michigan</option>
+                                            <option value="minnesota">Minnesota</option>
+                                            <option value="mississippi">Mississippi</option>
+                                            <option value="missouri">Missouri</option>
+                                            <option value="montana">Montana</option>
+                                            <option value="nebraska">Nebraska</option>
+                                            <option value="nevada">Nevada</option>
+                                            <option value="new-hampshire">New Hampshire</option>
+                                            <option value="new-jersey">New Jersey</option>
+                                            <option value="new-mexico">New Mexico</option>
+                                            <option value="new-york">New York</option>
+                                            <option value="north-carolina">North Carolina</option>
+                                            <option value="north-dakota">North Dakota</option>
+                                            <option value="ohio">Ohio</option>
+                                            <option value="oklahoma">Oklahoma</option>
+                                            <option value="oregon">Oregon</option>
+                                            <option value="pennsylvania">Pennsylvania</option>
+                                            <option value="rhode-island">Rhode Island</option>
+                                            <option value="south-carolina">South Carolina</option>
+                                            <option value="south-dakota">South Dakota</option>
+                                            <option value="tennessee">Tennessee</option>
+                                            <option value="texas">Texas</option>
+                                            <option value="utah">Utah</option>
+                                            <option value="vermont">Vermont</option>
+                                            <option value="virginia">Virginia</option>
+                                            <option value="washington">Washington</option>
+                                            <option value="west-virginia">West Virginia</option>
+                                            <option value="wisconsin">Wisconsin</option>
+                                            <option value="wyoming">Wyoming</option>
+                                        </select>
+                                    </div>
+                                    <input type="text" class="validate-required" name="wherecity" placeholder="City" />
+                                </div>
+                                <textarea class="validate-required" name="message" rows="4" placeholder="Message"></textarea>
+                                <input type="submit" value="Submit Review" />
+                            % end
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>

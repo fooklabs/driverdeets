@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.8.0" last-position="0,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<role name="platehate">
+</role>
+
+<database name="new_database">
+</database>
+
+<schema name="public" protected="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="users">
+	<schema name="public"/>
+	<role name="platehate"/>
+	<position x="51" y="214"/>
+	<column name="user_id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="email">
+		<type name="text"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="text"/>
+	</column>
+	<constraint name="user_id_pk" type="pk-constr" table="public.users">
+		<columns names="user_id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="login_uq" type="uq-constr" table="public.users">
+		<columns names="login" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="cities">
+	<schema name="public"/>
+	<role name="platehate"/>
+	<position x="1013" y="159"/>
+	<column name="city_id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="city" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="stub" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="region_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="metro_id" not-null="true">
+		<type name="bigint"/>
+	</column>
+	<constraint name="city_id_pk" type="pk-constr" table="public.cities">
+		<columns names="city_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="regions">
+	<schema name="public"/>
+	<role name="platehate"/>
+	<position x="405" y="236"/>
+	<column name="region_id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="region" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="stub" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="abbr">
+		<type name="text"/>
+	</column>
+	<column name="country_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="region_id_pk" type="pk-constr" table="public.regions">
+		<columns names="region_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="plates">
+	<schema name="public"/>
+	<role name="platehate"/>
+	<position x="476" y="511"/>
+	<column name="plate_id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="plate" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="region_id" not-null="true">
+		<type name="bigint"/>
+	</column>
+	<constraint name="plate_id_pk" type="pk-constr" table="public.plates">
+		<columns names="plate_id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="plate_region_uq" type="uq-constr" table="public.plates">
+		<columns names="plate,region_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="users_plates">
+	<schema name="public"/>
+	<role name="platehate"/>
+	<position x="89" y="458"/>
+	<column name="user_id" not-null="true">
+		<type name="bigint"/>
+	</column>
+	<column name="plate_id" not-null="true">
+		<type name="bigint"/>
+	</column>
+	<constraint name="user_plate_uq" type="uq-constr" table="public.users_plates">
+		<columns names="user_id,plate_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="reviews">
+	<schema name="public"/>
+	<role name="platehate"/>
+	<position x="950" y="290"/>
+	<column name="review_id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="plate_id" not-null="true">
+		<type name="bigint"/>
+	</column>
+	<column name="body" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="type" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="city_id" not-null="true">
+		<type name="bigint"/>
+	</column>
+	<column name="viewed" not-null="true" default-value="FALSE">
+		<type name="boolean"/>
+	</column>
+	<column name="anonymous" not-null="true" default-value="FALSE">
+		<type name="boolean"/>
+	</column>
+	<column name="funny" not-null="true" default-value="0">
+		<type name="integer"/>
+	</column>
+	<column name="useful" not-null="true" default-value="0">
+		<type name="integer"/>
+	</column>
+	<column name="mean" not-null="true" default-value="0">
+		<type name="integer"/>
+	</column>
+	<column name="nice" not-null="true" default-value="0">
+		<type name="integer"/>
+	</column>
+	<column name="created" not-null="true" default-value="now()">
+		<type name="timestamp" with-timezone="true"/>
+	</column>
+	<constraint name="review_id_pk" type="pk-constr" table="public.reviews">
+		<columns names="review_id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="plate_body_uq" type="uq-constr" table="public.reviews">
+		<columns names="plate_id,body" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="metros">
+	<schema name="public"/>
+	<role name="platehate"/>
+	<position x="707" y="22"/>
+	<column name="metro_id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="metro" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="stub" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="region_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="metro_id_pk" type="pk-constr" table="public.metros">
+		<columns names="metro_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="countries">
+	<schema name="public"/>
+	<role name="platehate"/>
+	<position x="292" y="37"/>
+	<column name="country_id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="stub" not-null="true">
+		<type name="text"/>
+	</column>
+	<constraint name="country_id_pk" type="pk-constr" table="public.countries">
+		<columns names="country_id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="country_uq" type="uq-constr" table="public.countries">
+		<columns names="country" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="stub_uq" type="uq-constr" table="public.countries">
+		<columns names="stub" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="plate_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.plates" table="public.reviews">
+	<columns names="plate_id" ref-type="src-columns"/>
+	<columns names="plate_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="city_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.cities" table="public.reviews">
+	<columns names="city_id" ref-type="src-columns"/>
+	<columns names="city_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="country_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.countries" table="public.regions">
+	<columns names="country_id" ref-type="src-columns"/>
+	<columns names="country_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="region_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.regions" table="public.plates">
+	<columns names="region_id" ref-type="src-columns"/>
+	<columns names="region_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="user_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.users" table="public.users_plates">
+	<columns names="user_id" ref-type="src-columns"/>
+	<columns names="user_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="plate_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.plates" table="public.users_plates">
+	<columns names="plate_id" ref-type="src-columns"/>
+	<columns names="plate_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="region_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.regions" table="public.cities">
+	<columns names="region_id" ref-type="src-columns"/>
+	<columns names="region_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="metro_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.metros" table="public.cities">
+	<columns names="metro_id" ref-type="src-columns"/>
+	<columns names="metro_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="region_id_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.regions" table="public.metros">
+	<columns names="region_id" ref-type="src-columns"/>
+	<columns names="region_id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_plates_regions" type="relfk"
+	 src-table="public.plates"
+	 dst-table="public.regions"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_reviews_plates" type="relfk"
+	 src-table="public.reviews"
+	 dst-table="public.plates"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_users_plates_users" type="relfk"
+	 src-table="public.users_plates"
+	 dst-table="public.users"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_users_plates_plates" type="relfk"
+	 src-table="public.users_plates"
+	 dst-table="public.plates"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_cities_regions" type="relfk"
+	 src-table="public.cities"
+	 dst-table="public.regions"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_cities_metros" type="relfk"
+	 src-table="public.cities"
+	 dst-table="public.metros"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_reviews_cities" type="relfk"
+	 src-table="public.reviews"
+	 dst-table="public.cities"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_regions_countries" type="relfk"
+	 src-table="public.regions"
+	 dst-table="public.countries"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_metros_regions" type="relfk"
+	 src-table="public.metros"
+	 dst-table="public.regions"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>

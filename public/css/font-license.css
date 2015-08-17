@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'License-Plate';
+    src:  url('/fonts/License-Plate.ttf.woff') format('woff'),
+    url('/fonts/License-Plate.ttf.svg#License-Plate') format('svg'),
+    url('/fonts/License-Plate.ttf.eot'),
+    url('/fonts/License-Plate.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.plate {
+  font-family: 'License-Plate' !important;
+  font-size: 40px !important;
+  font-weight: 600 !important;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #292929;
+}
+.plate-lg {
+  font-family: 'License-Plate' !important;
+  font-size: 120px !important;
+  font-weight: 600 !important;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #292929;
+  padding-top:25%;
+}

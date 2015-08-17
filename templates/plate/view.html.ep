@@ -1,0 +1,115 @@
+% layout 'default';
+% content_for css => begin
+<style type="text/css">
+            .ass {
+                position: relative;
+                display: table;
+                height: 230px;
+                background: url('/img/plates/<%= $region %>.jpg') no-repeat top center ;
+                background-size: 100% auto;
+                margin: 0 auto;
+            }
+            .overlays {
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .fuck {
+                font-size:100px;
+            }
+            .bg-img {
+                margin-right: -15px;
+                margin-left: -15px;
+                padding-bottom: 20%;
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                background-size: 100% auto;
+                vertical-align:middle;
+            }
+        </style>
+% end
+<div class="main-container">
+            <section class="pb0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-5" align="center">
+                        <div class="bg-img" style="background: url('/img/plates/<%= $region %>.jpg') no-repeat; background-size: 100% auto; vertical-align:middle;">
+                                <h2 class="uppercase plate-lg"><%= $plate %></h2>
+                            </div>
+                        </div>
+                        <div class="col-sm-7" align="right">
+                        <div class="btn-group">
+                        <a class="btn btn-lg btn-filled mb32" href="#">Write a Review</a>
+                        <div><input style="display: none;" id="example-color" type="number" value="4.5"><h4>906 Reviews</h4></div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4 class="uppercase mb32" style="text-align:right;">Reviews</h4>
+                            <hr>
+                        </div>
+                    </div>
+                    % if ( @{$reviews} ) {
+                    % for ( @{$reviews} ) {
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="feature feature-3 feature-4 mb32">
+                                <div class="left">
+                                    <div class="mb16"><input style="display: none;" id="example-color2" type="number" value="4" /></div>
+                                    <a href="#" class="review"><%= $_->{user_id} %></a><br />
+                                    <h5 class="mb0"><a href="#" class="review"><%= $_->{city}->{city} %>, <%= uc $_->{city}->{region}->{abbr} %></a></h5>
+                                    <h5>16 Reviews</h5>
+                                </div>
+                                <div class="right">
+                                    <p>
+                                        <%= $_->{body} %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mb64" style="text-align:right; border-bottom: 1px solid #000">
+                                <a class="btn btn-sm funny-selected" href="#">
+                                    <span class="fontelico-emo-laugh"></span> Funny <span style="text-align:right; font-size:14px;"><%= $_->{funny} %></span>
+                                </a>
+                                <a class="btn btn-sm useful-selected" href="#">
+                                    <span class="fontelico-emo-beer"></span> Useful <span style="text-align:right; font-size:14px;"> <%= $_->{useful} %></span>
+                                </a>
+                                <a class="btn btn-sm mean-selected" href="#">
+                                    <span class="fontelico-emo-devil"></span> Mean <span style="text-align:right; font-size:14px;"> <%= $_->{mean} %></span>
+                                </a>
+                                <a class="btn btn-sm nice-selected" href="#">
+                                    <span class="fontelico-emo-saint"></span> Nice <span style="text-align:right; font-size:14px;"> <%= $_->{nice} %></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    % }
+                    % } else {
+                        <div class="row">
+                            <div class="col-sm-12 mb64">
+                                <h5>This plate doesn't have any reviews. Why not leave one?</h5>
+                            </div>
+                        </div>
+                    % }
+
+                </div>
+                <!--end of container-->
+            </section>
+% content_for javascript => begin
+<script type="text/javascript">
+$('#example-color').rating({
+  color: '#999',
+  colorHover: '#CF4656',
+  size: '30px',
+  showLabel: false,
+  inline: true,
+  disabled: true,
+});
+$('#example-color2').rating({
+  color: '#999',
+  colorHover: '#CF4656',
+  showLabel: false,
+  disabled: true,
+});
+</script>
+% end

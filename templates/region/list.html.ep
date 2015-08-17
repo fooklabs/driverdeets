@@ -1,0 +1,272 @@
+% layout 'default';
+
+% content_for css => begin
+<style type="text/css">
+            .ass {
+                position: relative;
+                display: table;
+                height: 95px;
+                background: url('/img/plates/az.jpg') no-repeat top center ;
+                background-size: 100% auto;
+                margin: 0 auto;
+            }
+            .overlays {
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .ass h2 {
+                font-family: 'Fjalla One', sans-serif;
+                font-size: 24px;
+                font-color: #000;
+            }
+            .fuck {
+                font-size:100px;
+            }
+            .bg-img {
+                margin-right: -15px;
+                margin-left: -15px;
+                width: 100%;
+                padding-bottom: 5%;
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                background-size: 100% auto;
+                vertical-align:middle;
+            }
+        </style>
+% end
+<div class="main-container">
+    <section class="page-title page-title-4 bg-secondary">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="uppercase mb0">
+                    <i class="sf-<%= $metros->{abbr} %>"></i><%= $location %></h3>
+                </div>
+            </div>
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 mb48">
+                    <div class="select-option">
+                        <i class="ti-angle-down"></i>
+                        <select onchange="location = this.options[this.selectedIndex].value;">
+                            <option selected value="Default">Select a Metro Area or City</option>
+                            <optgroup label="Metro Areas">
+                            % for ( @{$metros->{metros}}) {
+                            <option value="/us/<%= $metros->{stub} %>/metro/<%= $_->{stub} %>"><%= $_->{metro} %></option>
+                            % }
+                            </optgroup>
+                            <optgroup label="Cities">
+                            % for ( @{$metros->{cities}}) {
+                            <option value="/us/<%= $metros->{stub} %>/city/<%= $_->{stub} %>"><%= $_->{city} %></option>
+                            % }
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--end of row-->
+
+            <div class="row">
+                <div class="text-tabs">
+                    <div class="col-sm-12 text-center">
+                        <ul class="tabs mb64">
+                            <li id="latest">
+                                <div class="tab-title">
+                                    <a href="<%= $link %>?f=latest">Latest</a>
+                                </div>
+
+                            </li>
+                            <li id="funny">
+                                <div class="tab-title">
+                                    <a href="<%= $link %>?f=funny">Funniest</a>
+                                </div>
+                            </li>
+                            <li id="useful">
+                                <div class="tab-title">
+                                    <a href="<%= $link %>?f=useful">Most Useful</a>
+                                </div>
+                            </li>
+                            <li id="mean">
+                                <div class="tab-title">
+                                    <a href="<%= $link %>?f=mean">Meanest</a>
+                                </div>
+                            </li>
+                            <li id="nice">
+                                <div class="tab-title">
+                                    <a href="<%= $link %>?f=nice">Nicest</a>
+                                </div>
+                            </li>
+                            <li id="fame">
+                                <div class="tab-title">
+                                    <a href="<%= $link %>?f=fame">Wall of Fame</a>
+                                </div>
+
+                            </li>
+                            <li id="shame">
+                                <div class="tab-title">
+                                    <a href="<%= $link %>?f=shame">Wall of Shame</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--end of row-->
+            % for ( @{$reviews} ) {
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="feature feature-3 feature-4 mb16">
+                        <div class="left" style="width:20%; margin-right:15%;">
+                            <div class="mb16" align="center">
+                                <div class="bg-img" style="background: url('/img/plates/<%= $_->{plate}->{region}->{abbr} %>.jpg') no-repeat; background-size: 100% auto; vertical-align:middle;">
+                                    <a href="/us/<%= $_->{plate}->{region}->{stub} %>/plate/<%= $_->{plate}->{plate} %>">
+                                    <h2 class="uppercase plate" style="padding-top:40px;text-align:center;"><%= $_->{plate}->{plate} %></h2>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mb16"><input style="display: none;" id="example-color2" type="number" value="4" /></div>
+                            <div class="mb16">
+                                <input style="display: none;" id="example-color2" type="number" value="4" />
+                            </div>
+                            <a href="#" class="review">Motherfucking John</a><br />
+                            <h5 class="mb0"><a href="#" class="review">Portland, OR</a></h5>
+                            <h5>16 Reviews</h5>
+                        </div>
+                        <div class="right" style="width:65%;">
+                            <p class="black">
+                                <%= $_->{body} %>
+                            </p>
+                        </div>
+                    </div>
+                    <div style="text-align:right;" id="<%= $_->{review_id} %>">
+                        <a class="btn btn-sm btn-vote" id="funny">
+                            <span class="fontelico-emo-laugh"></span> Funny <span class="votenum" style="text-align:right; font-size:14px;"> 10</span>
+                        </a>
+                        <a class="btn btn-sm btn-vote" id="useful">
+                            <span class="fontelico-emo-beer"></span> Useful <span class="votenum" style="text-align:right; font-size:14px;"> 10</span>
+                        </a>
+                        <a class="btn btn-sm btn-vote" id="mean">
+                            <span class="fontelico-emo-devil"></span> Mean <span class="votenum" style="text-align:right; font-size:14px;"> 10</span>
+                        </a>
+                        <a class="btn btn-sm btn-vote" id="nice">
+                            <span class="fontelico-emo-saint"></span> Nice <span class="votenum" style="text-align:right; font-size:14px;"> 10</span>
+                        </a>
+                    </div>
+                    <div class="mb64" style="border-bottom: 1px solid #000">
+
+                    </div>
+
+                </div>
+            </div>
+            % }
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </section>
+
+
+% content_for javascript => begin
+<script type="text/javascript">
+
+  function hide(){
+    var city = document.getElementById('city');
+    city.style.visibility = 'hidden';
+  }
+
+  function show(){
+    var city = document.getElementById('city');
+    city.style.visibility = 'visible';
+  }
+  // $("select").select2();
+  // $("#state").val("<%= $metros->{stub} %>").trigger("change");
+  $('#city').select2();
+  % if ( $name ) {
+    $("#city").val("<%= $name %>").trigger("change");
+  % }
+  // $('.city').select2({disabled: true)};
+  (function ($) {
+    $.querystring = (function (a) {
+        var i,
+            p,
+            b = {};
+        if (a === "") { return {}; }
+        for (i = 0; i < a.length; i += 1) {
+            p = a[i].split('=');
+            if (p.length === 2) {
+                b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+            }
+        }
+        return b;
+    }(window.location.search.substr(1).split('&')));
+  }(jQuery));
+  var f = $.querystring['f'];
+  $('ul.tabs li').removeClass('active');
+  if (typeof f !== 'undefined') {
+    $('#'+f).addClass('active');
+  }
+  else {
+    $('#latest').addClass('active');
+  }
+  $(".btn-vote").click(function() {
+        var what = this.id;
+        var foo = $(this);
+        var rid = $(this).closest('div').attr('id');
+        // console.log(what);
+        if ( $(this).hasClass(what) ) {
+            $.ajax({
+                type: "POST",
+                url: "/vote/"+rid+"/"+what+"/down",
+                dataType: 'text',
+                success: function(msg){
+                    foo.removeClass(what);
+                    var num = parseInt(foo.children('span.votenum').html()) - 1;
+                    foo.children('span.votenum').html(num);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("some error");
+                }
+            });
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: "/vote/"+rid+"/"+what+"/up",
+                dataType: 'text',
+                success: function(msg){
+                    foo.addClass(what);
+                    var num = parseInt(foo.children('span.votenum').html()) + 1;
+                    foo.children('span.votenum').html(num);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("some error");
+                }
+            });
+        }
+    });
+  // $(document.body).on("change","#state",function(){
+  //   show();
+  // $('.city').select2();
+  // });
+    $('#example-color').rating({
+  color: '#999',
+  colorHover: '#CF4656',
+  size: '30px',
+  showLabel: false,
+  inline: true,
+  disabled: true,
+});
+$('#example-color2').rating({
+  color: '#999',
+  colorHover: '#CF4656',
+  showLabel: false,
+  disabled: true,
+});
+
+</script>
+% end

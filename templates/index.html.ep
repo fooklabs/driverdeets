@@ -1,0 +1,151 @@
+% layout 'default';
+
+<div class="main-container">
+            <section class="image-bg overlay bg-primary">
+                <div class="background-image-holder">
+                    <img alt="Background Image" class="background-image" src="img/home-ph.png">
+                </div>
+                <div class="container pt80">
+                    <div class="row mb24 mb-xs-0">
+                        <div class="col-sm-12 text-center">
+                            <h1 class="mb16"><strong>Hey asshole</strong>, who gave you a license?</h1>
+                            <p class="lead">
+                                Finally, a platform for yelling at bad drivers, and thanking those who deserve it.
+                            </p>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row mb80 mb-xs-24">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            %= form_for '/plate/find', class => 'thirds', id => 'view', => (method => 'post') => begin
+                                <div class="select-option">
+                                    <i class="ti-angle-down"></i>
+                                    <select name="region">
+                                        <option selected="" value="Default">Select a State</option>
+                                        <option value="alabama">Alabama</option>
+                                        <option value="alaska">Alaska</option>
+                                        <option value="arizona">Arizona</option>
+                                        <option value="arkansas">Arkansas</option>
+                                        <option value="california">California</option>
+                                        <option value="colorado">Colorado</option>
+                                        <option value="connecticut">Connecticut</option>
+                                        <option value="delaware">Delaware</option>
+                                        <option value="district-of-columbia">District of Columbia</option>
+                                        <option value="florida">Florida</option>
+                                        <option value="georgia">Georgia</option>
+                                        <option value="hawaii">Hawaii</option>
+                                        <option value="idaho">Idaho</option>
+                                        <option value="illinois">Illinois</option>
+                                        <option value="indiana">Indiana</option>
+                                        <option value="iowa">Iowa</option>
+                                        <option value="kansas">Kansas</option>
+                                        <option value="kentucky">Kentucky</option>
+                                        <option value="louisiana">Louisiana</option>
+                                        <option value="maine">Maine</option>
+                                        <option value="maryland">Maryland</option>
+                                        <option value="massachusetts">Massachusetts</option>
+                                        <option value="michigan">Michigan</option>
+                                        <option value="minnesota">Minnesota</option>
+                                        <option value="mississippi">Mississippi</option>
+                                        <option value="missouri">Missouri</option>
+                                        <option value="montana">Montana</option>
+                                        <option value="nebraska">Nebraska</option>
+                                        <option value="nevada">Nevada</option>
+                                        <option value="new-hampshire">New Hampshire</option>
+                                        <option value="new-jersey">New Jersey</option>
+                                        <option value="new-mexico">New Mexico</option>
+                                        <option value="new-york">New York</option>
+                                        <option value="north-carolina">North Carolina</option>
+                                        <option value="north-dakota">North Dakota</option>
+                                        <option value="ohio">Ohio</option>
+                                        <option value="oklahoma">Oklahoma</option>
+                                        <option value="oregon">Oregon</option>
+                                        <option value="pennsylvania">Pennsylvania</option>
+                                        <option value="rhode-island">Rhode Island</option>
+                                        <option value="south-carolina">South Carolina</option>
+                                        <option value="south-dakota">South Dakota</option>
+                                        <option value="tennessee">Tennessee</option>
+                                        <option value="texas">Texas</option>
+                                        <option value="utah">Utah</option>
+                                        <option value="vermont">Vermont</option>
+                                        <option value="virginia">Virginia</option>
+                                        <option value="washington">Washington</option>
+                                        <option value="west-virginia">West Virginia</option>
+                                        <option value="wisconsin">Wisconsin</option>
+                                        <option value="wyoming">Wyoming</option>
+                                    </select>
+                                </div>
+                                <input type="text" name="plate" class="signup-email-field" placeholder="License" />
+                                <input type="hidden" name="country" value="us" />
+                                <input type="submit" class="btn-white btn-tropical" value="Go" />
+                            % end
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+            <section class="bg-secondary pt120 pb120 pt-xs-40 pb-xs-40">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-md-offset-2">
+                            <div class="feature feature-3 mb64 mb-xs-24">
+                                <div class="left">
+                                    <i class="ti-announcement icon-sm"></i>
+                                </div>
+                                <div class="right">
+                                    <h4 class="mb16">Yell at Them</h4>
+                                    <p>
+                                        Has some asshole just cut you off then slam on their brakes? The finger is so passé. Now's your chance to finally say to them what you'd really like to say.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end of feature-->
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="feature feature-3 mb64 mb-xs-24">
+                                <div class="left">
+                                    <i class="ti-heart icon-sm"></i>
+                                </div>
+                                <div class="right">
+                                    <h4 class="mb16">Show Them Love</h4>
+                                    <p>
+                                        Did some awesome person let you in, but didn't notice when you did the wave? Show them some love. Let them know they are a great driver with a positive review.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end of feature-->
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-md-offset-2">
+                            <div class="feature feature-3 mb-xs-24">
+                                <div class="left">
+                                    <i class="ti-crown icon-sm"></i>
+                                </div>
+                                <div class="right">
+                                    <h4 class="mb16">Rise in the Ranks</h4>
+                                    <p>
+                                        Don't just say you're a good driver, prove it. Every positive review pushes your rankings higher. Every negative review pushes you lower. Get into the top leaderboard for your city, maybe even your state.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end of feature-->
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="feature feature-3">
+                                <div class="left">
+                                    <i class="ti-comment-alt icon-sm"></i>
+                                </div>
+                                <div class="right">
+                                    <h4 class="mb16">Get the Deets</h4>
+                                    <p>
+                                        Check out what other people think about a driver. Sign up for an account and you will be notified when someone says something about you.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end of feature-->
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>

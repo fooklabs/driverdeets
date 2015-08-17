@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Driver Deets &#8212 Let the world know CANTDRV is being serious.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/select2.min.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/stateface.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/middlefinger.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/font-license.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/theme-gunmetal.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/rating.css">
+        <%= content 'css' %>
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
+        <link rel="apple-touch-icon" sizes="57x57" href="/img/fav/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/img/fav/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/img/fav/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/img/fav/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/img/fav/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/img/fav/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/img/fav/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/img/fav/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/fav/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/img/fav/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/fav/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/img/fav/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/fav/favicon-16x16.png">
+        <link rel="manifest" href="/img/fav/manifest.json">
+        <meta name="msapplication-TileImage" content="/img/fav/ms-icon-144x144.png">
+    </head>
+    <body>
+        <div class="nav-container">
+            <a id="top"></a>
+            <nav>
+                <div class="nav-bar">
+                    <div class="module left">
+                        <a href="/">
+                            <img class="logo logo-light" alt="Foundry" src="/img/logo-light.png" />
+                            <img class="logo logo-dark" alt="Foundry" src="/img/logo-dark.png" />
+                        </a>
+                    </div>
+                    <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
+                        <i class="ti-menu"></i>
+                    </div>
+
+                    <div class="module-group right" style="width:90%;">
+                        % if ( session('login') ) {
+                        <div class="module widget-handle left" style="width:70%;">
+                        % } else {
+                        <div class="module widget-handle left" style="width:60%;">
+                        % }
+                            % if ( url_for('current') ne '/' ) {
+                             <form class="search-form quarters">
+
+                                    <div class="select-option">
+                                        <i class="ti-angle-down"></i>
+                                        <select name="platestate">
+                                            <option selected="" value="Default">Select a State</option>
+                                            <option value="alabama">Alabama</option>
+                                            <option value="alaska">Alaska</option>
+                                            <option value="arizona">Arizona</option>
+                                            <option value="arkansas">Arkansas</option>
+                                            <option value="california">California</option>
+                                            <option value="colorado">Colorado</option>
+                                            <option value="connecticut">Connecticut</option>
+                                            <option value="delaware">Delaware</option>
+                                            <option value="district-of-columbia">District of Columbia</option>
+                                            <option value="florida">Florida</option>
+                                            <option value="georgia">Georgia</option>
+                                            <option value="hawaii">Hawaii</option>
+                                            <option value="idaho">Idaho</option>
+                                            <option value="illinois">Illinois</option>
+                                            <option value="indiana">Indiana</option>
+                                            <option value="iowa">Iowa</option>
+                                            <option value="kansas">Kansas</option>
+                                            <option value="kentucky">Kentucky</option>
+                                            <option value="louisiana">Louisiana</option>
+                                            <option value="maine">Maine</option>
+                                            <option value="maryland">Maryland</option>
+                                            <option value="massachusetts">Massachusetts</option>
+                                            <option value="michigan">Michigan</option>
+                                            <option value="minnesota">Minnesota</option>
+                                            <option value="mississippi">Mississippi</option>
+                                            <option value="missouri">Missouri</option>
+                                            <option value="montana">Montana</option>
+                                            <option value="nebraska">Nebraska</option>
+                                            <option value="nevada">Nevada</option>
+                                            <option value="new-hampshire">New Hampshire</option>
+                                            <option value="new-jersey">New Jersey</option>
+                                            <option value="new-mexico">New Mexico</option>
+                                            <option value="new-york">New York</option>
+                                            <option value="north-carolina">North Carolina</option>
+                                            <option value="north-dakota">North Dakota</option>
+                                            <option value="ohio">Ohio</option>
+                                            <option value="oklahoma">Oklahoma</option>
+                                            <option value="oregon">Oregon</option>
+                                            <option value="pennsylvania">Pennsylvania</option>
+                                            <option value="rhode-island">Rhode Island</option>
+                                            <option value="south-carolina">South Carolina</option>
+                                            <option value="south-dakota">South Dakota</option>
+                                            <option value="tennessee">Tennessee</option>
+                                            <option value="texas">Texas</option>
+                                            <option value="utah">Utah</option>
+                                            <option value="vermont">Vermont</option>
+                                            <option value="virginia">Virginia</option>
+                                            <option value="washington">Washington</option>
+                                            <option value="west-virginia">West Virginia</option>
+                                            <option value="wisconsin">Wisconsin</option>
+                                            <option value="wyoming">Wyoming</option>
+                                        </select>
+                                    </div>
+                                    <input type="text" placeholder="License Plate" />
+                                    <a class="btn btn-sm btn-tropical" href="/register">Go There</a>
+                                </form>
+                                % }
+                        </div>
+                        <!--end of menu module-->
+                        <div class="module widget-menu left">
+                                <ul class="menu">
+                                <li class="has-dropdown">
+                                    <a href="#">
+                                        States
+                                    </a>
+                                    <ul class="mega-menu">
+                                        <li>
+                                            <ul>
+                                                <li>
+                                                    <span class="title">West</span>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/alaska">
+                                                        Alaska</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/california">
+                                                        California</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/colorado">
+                                                        Colorado</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/hawaii">
+                                                        Hawaii</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/idaho">
+                                                        Idaho</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/montana">
+                                                        Montana</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/nevada">
+                                                        Nevada</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/oregon">
+                                                        Oregon</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/utah">
+                                                        Utah</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/washington">
+                                                        Washington</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/wyoming">
+                                                        Wyoming</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
+                                                <li>
+                                                    <span class="title">Midwest</span>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/illinois">
+                                                        Illinois</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/indiana">
+                                                        Indiana</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/iowa">
+                                                        Iowa</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/kansas">
+                                                        Kansas</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/michigan">
+                                                        Michigan</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/minnesota">
+                                                        Minnesota</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/missouri">
+                                                        Missouri</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/nebraska">
+                                                        Nebraska</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/north-dakota">
+                                                        North Dakota</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/ohio">
+                                                        Ohio</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/south-dakota">
+                                                        South Dakota</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/wisconsin">
+                                                        Wisconsin</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
+                                                <li>
+                                                    <span class="title">Southwest</span>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/arizona">
+                                                        Arizona</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/new-mexico">
+                                                        New Mexico</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/oklahoma">
+                                                        Oklahoma</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/texas">
+                                                        Texas</a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
+                                                <li>
+                                                    <span class="title">Southeast</span>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/alabama">
+                                                        Alabama</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/arkansas">
+                                                        Arkansas</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/florida">
+                                                        Florida</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/georgia">
+                                                        Georgia</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/kentucky">
+                                                        Kentucky</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/louisiana">
+                                                        Louisiana</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/mississippi">
+                                                        Mississippi</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/north-carolina">
+                                                        North Carolina</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/south-carolina">
+                                                        South Carolina</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/tennessee">
+                                                        Tennessee</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/virginia">
+                                                        Virginia</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/west-virginia">
+                                                        West Virginia</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
+                                                <li>
+                                                    <span class="title">Northeast</span>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/connecticut">
+                                                        Connecticut</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/deleware">
+                                                        Deleware</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/maine">
+                                                        Maine</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/maryland">
+                                                        Maryland</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/massachusetts">
+                                                        Massachusetts</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/new-hampshire">
+                                                        New Hampshire</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/new-jersey">
+                                                        New Jersey</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/new-york">
+                                                        New York</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/pennsylvania">
+                                                        Pennsylvania</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/rhode-island">
+                                                        Rhode Island</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/us/vermont">
+                                                        Vermont</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="#">
+                                        Stuff
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                About Us
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Blog
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Feature Request
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Contact
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="module widget-handle right">
+                          % if ( session('login') ) {
+                            <i class="ti ti-user"></i> <%= session('login') %>
+                          % } else {
+                            <a class="btn btn-sm btn-filled" href="/register">Sign Up</a>
+                            <a class="btn btn-sm" href="/login">Sign In</a>
+                          % }
+                        </div>
+                    </div>
+                    <!--end of module group-->
+                </div>
+            </nav>
+        </div>
+        <%= content %>
+        <footer class="footer-1 bg-dark">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <img alt="Logo" class="logo" src="/img/logo-light.png" />
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="widget">
+                                <h6 class="title">Recent Posts</h6>
+                                <hr>
+                                <ul class="link-list recent-posts">
+                                    <li>
+                                        <a href="#">Hugging pugs is super trendy</a>
+                                        <span class="date">February
+                                            <span class="number">14, 2015</span>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <a href="#">Spinning vinyl is oh so cool</a>
+                                        <span class="date">February
+                                            <span class="number">9, 2015</span>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <a href="#">Superior theme design by pros</a>
+                                        <span class="date">January
+                                            <span class="number">27, 2015</span>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end of widget-->
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="widget">
+                                <h6 class="title">Latest Updates</h6>
+                                <hr>
+                                <div class="twitter-feed">
+                                    <div class="tweets-feed" data-widget-id="628435669002534912">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end of widget-->
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="widget">
+                                <h6 class="title">Instagram</h6>
+                                <hr>
+                                <div class="instafeed" data-user-name="funsizeco">
+                                    <ul></ul>
+                                </div>
+                            </div>
+                            <!--end of widget-->
+                        </div>
+                    </div>
+                    <!--end of row-->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span class="sub">&copy; Copyright 2015 - Fook Labs, LLC</span>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <ul class="list-inline social-list">
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-twitter-alt"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-dribbble"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-vimeo-alt"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--end of container-->
+                <a class="btn btn-sm fade-half back-to-top inner-link" href="#top">Top</a>
+            </footer>
+        </div>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/flexslider.min.js"></script>
+        <script src="/js/lightbox.min.js"></script>
+        <script src="/js/masonry.min.js"></script>
+        <script src="/js/twitterfetcher.min.js"></script>
+        <script src="/js/spectragram.min.js"></script>
+        <script src="/js/ytplayer.min.js"></script>
+        <script src="/js/countdown.min.js"></script>
+        <script src="/js/smooth-scroll.min.js"></script>
+        <script src="/js/parallax.js"></script>
+        <script src="/js/select2.min.js"></script>
+        <script src="/js/scripts.js"></script>
+        <script src="/js/tipi.js"></script>
+        <script src="/js/rating.js"></script>
+        <%= content 'javascript' %>
+    </body>
+</html>
