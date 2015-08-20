@@ -1,7 +1,7 @@
 package DriverDeets;
 use Mojo::Base 'Mojolicious';
 
-use Mojo::Pg;
+#use Mojo::Pg;
 use Mojo::Home;
 use Mojolicious::Plugin::Bcrypt;
 use Mojolicious::Plugin::Authentication;

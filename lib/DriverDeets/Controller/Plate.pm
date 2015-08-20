@@ -43,7 +43,6 @@ sub review {
   $validation->required('message')->size(1, 2500);
   my $output = $validation->output;
   $output->{platenum} = uc $output->{platenum};
-  $output->{platenum} =~ s/[^a-z0-9]//gi;
   $output->{wherecity} = lc $output->{wherecity};
 
   # We need to get region_id for platestate and wherestate
