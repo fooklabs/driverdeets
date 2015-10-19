@@ -11,12 +11,13 @@
                         <h4 class="uppercase">Sign In</h4>
                         %= form_for 'login', class => 'text-left', id => 'login', => (method => 'post') => begin
                         <form class="text-left">
-                            <input class="mb0" type="text" placeholder="Username" name="login"/>
-                            <input class="mb0" type="password" placeholder="Password" name="password" />
+                            <input class="mb0" type="text" placeholder="Username" name="login" required/>
+                            <input class="mb0" type="password" placeholder="Password" name="password" required/>
+                            <input type="hidden" name="from" value="<%= $url %>">
                             <input type="submit" value="Login" />
                         % end
-                        <p class="mb0">Forgot your password?
-                            <a href="/reset">Click Here To Reset</a>
+                        <p class="mb0">Don't have an account?
+                            <a href="/register">Get One!</a>
                         </p>
                     </div>
                 </div>

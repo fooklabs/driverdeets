@@ -1,45 +1,42 @@
 % layout 'default';
 <div class="main-container">
-    <section class="cover fullscreen image-bg overlay">
-        <div class="background-image-holder">
-            <img alt="image" class="background-image" src="img/home2.jpg" />
-        </div>
-        <div class="container v-align-transform">
+    <section class="page-title page-title-3 bg-dark">
+        <div class="container">
             <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <div class="feature bordered text-center">
-                        <h4 class="uppercase">Create an Account</h4>
-                        %= form_for 'register', class => 'text-left', id => 'register', autocomplete => 'off', => (method => 'post') => begin
-
-
-                            <input type="text" name="register_login" id="register_login" placeholder="Username" data-validation="" required/>
-                            <input type="text" name="email" placeholder="Email Address (optional)" data-validation="email" />
-                            <input type="password" id="password" name="password" data-validation="length" data-validation-length="min6" placeholder="Password" required />
-                            <input type="password" id="repassword" name="repassword" placeholder="Confirm Password" data-validation="confirmation" data-validation-confirm="password" required />
-                            <div class="input-with-label text-left plates-wrapper">
-                                <span>Your License Plates:</span>
-                            </div>
-                            <input type="hidden" name="from" value="<%= $url %>">
-                            <a class="btn btn-sm add_field_button" href="#">Add a Plate</a>
-                            <input type="submit" value="Register" />
-                            % if ( $error ) {
-                                <span class="help-block form-error"><%= $error %></span>
-                            % }
-                        % end
-                    </div>
+                <div class="col-sm-12">
+                    <h3 class="uppercase mb0">
+                    <i class="ti-settings"></i> settings (nothing here works yet)</h3>
                 </div>
             </div>
             <!--end of row-->
         </div>
         <!--end of container-->
+    </section>
+    <section>
+        <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="input-with-label text-left">
+            <span class="mb16">Change Your Password:</span>
+            <input placeholder="Current Password" type="password">
+            <input placeholder="New Password" type="password">
+            <input placeholder="Verify Password" type="password">
+            <input value="Change Password" type="submit">
+            </div>
+            <div class="input-with-label text-left plates-wrapper">
+                <span class="mb16">Your License Plates:</span>
+
+            </div>
+            <a class="btn btn-sm add_field_button" href="#">Add Another</a>
+            <input value="Save Changes" type="submit">
+
         <div id="acontent" style="display:none;">
             <div>
             <a href="#" class="remove_field">Remove</a>
             <div class="halves">
                 <div class="select-option">
                     <i class="ti-angle-down" style="color: #000;"></i>
-                    <select name="states" required>
-                        <option selected="true" disabled="disabled">Select a State</option>
+                    <select name="states">
+                        <option selected="" value="Default">Select a State</option>
                         <option value="Alabama">Alabama</option>
                         <option value="Alaska">Alaska</option>
                         <option value="Arizona">Arizona</option>
@@ -93,11 +90,14 @@
                         <option value="Wyoming">Wyoming</option>
                     </select>
                 </div>
-                <input type="text" name="plates" placeholder="Plate #" data-validation="length" data-validation-length="max7" data-sanatize="upper" required/>
+                <input type="text" name="plates" placeholder="Plate #" />
             </div>
             </div>
         </div>
+        </div>
+                </div>
     </section>
+</div>
 % content_for javascript => begin
 <script type="text/javascript">
     $(document).ready(function() {
@@ -120,7 +120,16 @@
             e.preventDefault(); $(this).parent('div').remove(); x--;
             $('.cover').css( "height", "-=100px" );
         })
-        $.validate();
+
+        % for ( @{$plates} ) {
+            console.log("<%= $_->{region}->{region} %>");
+            console.log("<%= $_->{plate} %>");
+            content = $('#acontent').clone();
+            $(content).find("option[value='<%= $_->{region}->{region} %>']").attr("selected","selected");
+            $(content).find('input').attr("value", "<%= $_->{plate} %>");
+            $(wrapper).append($(content).html());
+            x++;
+        % }
     });
 </script>
 % end

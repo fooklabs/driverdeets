@@ -1,0 +1,131 @@
+% layout 'default';
+
+% content_for css => begin
+<style type="text/css">
+            .ass {
+                position: relative;
+                display: table;
+                height: 95px;
+                background: url('/img/plates/az.jpg') no-repeat top center ;
+                background-size: 100% auto;
+                margin: 0 auto;
+            }
+            .overlays {
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .ass h2 {
+                font-family: 'Fjalla One', sans-serif;
+                font-size: 24px;
+                font-color: #000;
+            }
+            .fuck {
+                font-size:100px;
+            }
+            .bg-img {
+                margin-right: -15px;
+                margin-left: -15px;
+                width: 100%;
+                padding-bottom: 5%;
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                background-size: 100% auto;
+                vertical-align:middle;
+            }
+        </style>
+% end
+<div class="main-container">
+    <section class="page-title page-title-3 bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="uppercase mb0">
+                    <i class="ti-email"></i> Messages</h3>
+                </div>
+            </div>
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </section>
+    <section>
+        <div class="container">
+
+            % if ( $reviews->[0]->{city} ) {
+            <!--end of row-->
+            % for ( @{$reviews} ) {
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="feature feature-3 feature-4 mb16">
+                        <div class="left" style="width:20%;margin-right:10%;">
+                            <div class="mb16" align="center">
+                                <div class="bg-img" style="background: url('/img/plates/<%= $_->{city}->{metro}->{region}->{abbr} %>.jpg') no-repeat; background-size: 100% auto; vertical-align:middle;">
+                                    <a href="/plate/us/<%= $_->{city}->{metro}->{region}->{stub} %>/<%= $_->{plate}->{plate} %>">
+                                    <h2 class="uppercase plate" style="padding-top:40px;text-align:center;"><%= $_->{plate}->{plate} %></h2>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right" style="width:65%;">
+                            <div class="mb16">
+                              <input style="display: none;" class="review-rating" type="number" value="<%= $_->{rating} %>" />
+                              % my $created = (split(/\s+/,$_->{created}))[0];
+                              % $created =~ s/-/\//g;
+                              <%= $created %>
+                           </div>
+                            <p class="black">
+                                <%= $_->{body} %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="vote-btn-group" id="<%= $_->{review_id} %>">
+                        <a class="btn btn-sm btn-vote" id="funny">
+                            <span class="fontelico-emo-laugh"></span> Funny <span class="votenum" style="text-align:right; font-size:14px;"> <%= $_->{funny} %></span>
+                        </a>
+                        <a class="btn btn-sm btn-vote" id="useful">
+                            <span class="fontelico-emo-beer"></span> Useful <span class="votenum" style="text-align:right; font-size:14px;"> <%= $_->{useful} %></span>
+                        </a>
+                        <a class="btn btn-sm btn-vote" id="mean">
+                            <span class="fontelico-emo-devil"></span> Mean <span class="votenum" style="text-align:right; font-size:14px;"> <%= $_->{mean} %></span>
+                        </a>
+                        <a class="btn btn-sm btn-vote" id="nice">
+                            <span class="fontelico-emo-saint"></span> Nice <span class="votenum" style="text-align:right; font-size:14px;"> <%= $_->{nice} %></span>
+                        </a>
+                    </div>
+                    <div class="mb64" style="border-bottom: 1px solid #000">
+
+                    </div>
+
+                </div>
+            </div>
+            % }
+            % } else {
+                <div class="col-sm-10 col-sm-offset-1">
+                          <div class="text-center">
+                                <span class="fontelico-emo-displeased icon icon-lg mb64 mb-xs-0"></span>
+                                <h1 class="large">There's nothing here.</h1>
+                            </div>
+                        </div>
+            % }
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </section>
+
+
+% content_for javascript => begin
+<script type="text/javascript">
+
+  // $(document.body).on("change","#state",function(){
+  //   show();
+  // $('.city').select2();
+  // });
+$('.review-rating').rating({
+  color: '#999',
+  colorHover: '#CF4656',
+  showLabel: false,
+  disabled: true,
+});
+
+</script>
+% end

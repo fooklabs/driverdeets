@@ -47,10 +47,17 @@ __PACKAGE__->table("votes");
   is_foreign_key: 1
   is_nullable: 0
 
-=head2 type
+=head2 what
 
   data_type: 'text'
   is_nullable: 0
+
+=head2 vote_id
+
+  data_type: 'integer'
+  is_auto_increment: 1
+  is_nullable: 0
+  sequence: 'votes_vote_id_seq'
 
 =cut
 
@@ -59,9 +66,46 @@ __PACKAGE__->add_columns(
   { data_type => "bigint", is_foreign_key => 1, is_nullable => 0 },
   "review_id",
   { data_type => "bigint", is_foreign_key => 1, is_nullable => 0 },
-  "type",
+  "what",
   { data_type => "text", is_nullable => 0 },
+  "vote_id",
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "votes_vote_id_seq",
+  },
 );
+
+=head1 PRIMARY KEY
+
+=over 4
+
+=item * L</vote_id>
+
+=back
+
+=cut
+
+__PACKAGE__->set_primary_key("vote_id");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<vote_uq>
+
+=over 4
+
+=item * L</user_id>
+
+=item * L</review_id>
+
+=item * L</what>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("vote_uq", ["user_id", "review_id", "what"]);
 
 =head1 RELATIONS
 
@@ -96,8 +140,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2015-08-10 00:45:02
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dh4RJpS+snJ3a24T3XYNmg
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2015-10-16 03:05:44
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lviYsjzKjWaNXC54fPpPKw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

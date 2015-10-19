@@ -53,6 +53,12 @@ __PACKAGE__->table("plates");
   is_foreign_key: 1
   is_nullable: 0
 
+=head2 review_count
+
+  data_type: 'integer'
+  default_value: 1
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -67,6 +73,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 0 },
   "region_id",
   { data_type => "bigint", is_foreign_key => 1, is_nullable => 0 },
+  "review_count",
+  { data_type => "integer", default_value => 1, is_nullable => 0 },
 );
 
 =head1 PRIMARY KEY
@@ -160,8 +168,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2015-08-10 00:45:02
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7ZAr1mjuxd5A9suz5SDhsQ
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2015-10-17 05:44:32
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:n24QfCpC8QPjUGl7Dmt23A
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -10,6 +10,90 @@ var mr_firstSectionHeight,
 $(document).ready(function() {
     "use strict";
 
+    function ajax(value) {
+                return new Promise(function(resolve, reject) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onload = function() {
+                        resolve(this.responseText);
+                    };
+                    xhr.onerror = reject;
+                    xhr.open('POST', '/check_login');
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.send("login="+value);
+                    xhr.send();
+                });
+            }
+    // Add custom validation rule
+    $.formUtils.addValidator({
+        name : 'login_check',
+        validatorFunction : function(value, $el, config, language, $form) {
+            ajax(value).then(function(result) {
+                console.log(result);
+            }).catch(function() {
+                // an error occurred
+            });
+        },
+        errorMessage : 'username is not available',
+        errorMessageKey: 'usernameNotAvailable'
+    });
+    $.validate({
+        ignore: [],
+        modules : 'security, sanitize'
+    });
+
+
+    // voting
+    $(".btn-vote").click(function() {
+        var what = this.id;
+        var foo = $(this);
+        var rid = $(this).closest('div').attr('id');
+
+        if ( $(this).hasClass(what) ) {
+            $.ajax({
+                type: "POST",
+                url: "/vote/"+rid+"/"+what+"/down",
+                dataType: 'text',
+                success: function(msg){
+                    console.log(msg);
+                    foo.removeClass(what);
+                    if ( what == 'nice' ) {
+                      $('a#mean').removeClass('disabled');
+                    }
+                    if ( what == 'mean' ) {
+                      $('a#nice').removeClass('disabled');
+                    }
+                    var num = parseInt(foo.children('span.votenum').html()) - 1;
+                    foo.children('span.votenum').html(num);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("some error");
+                }
+            });
+        }
+
+        else {
+            $.ajax({
+                type: "POST",
+                url: "/vote/"+rid+"/"+what+"/up",
+                dataType: 'text',
+                success: function(msg){
+                    console.log(msg);
+                    foo.addClass(what);
+                    if ( what == 'nice' ) {
+                      $('a#mean').addClass('disabled');
+                    }
+                    if ( what == 'mean' ) {
+                      $('a#nice').addClass('disabled');
+                    }
+                    var num = parseInt(foo.children('span.votenum').html()) + 1;
+                    foo.children('span.votenum').html(num);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("some error");
+                }
+            });
+        }
+    });
     // Smooth scroll to inner links
 
 	if($('.inner-link').length){
@@ -130,7 +214,7 @@ $(document).ready(function() {
         // Adjust fullscreen elements
 
         if ($(window).width() > 768) {
-            $('section.fullscreen:nth-of-type(1)').css('height', ($(window).height() - $('nav').outerHeight(true)));
+            $('section.fullscreen:nth-of-type(1)').css('height', ($(window).height() - $('nav').outerHeight(true)) + 100);
         }
 
     } else {
@@ -153,7 +237,9 @@ $(document).ready(function() {
     $('.menu > li > ul').each(function() {
         var menu = $(this).offset();
         var farRight = menu.left + $(this).outerWidth(true);
-        if (farRight > $(window).width() && !$(this).hasClass('mega-menu')) {
+        if ( $(this).hasClass("user-menu") ) {
+          $(this).css('right','-40px');
+        } else if (farRight > $(window).width() && !$(this).hasClass('mega-menu')) {
             $(this).addClass('make-right');
         } else if (farRight > $(window).width() && $(this).hasClass('mega-menu')) {
             var isOnScreen = $(window).width() - menu.left;
@@ -170,6 +256,16 @@ $(document).ready(function() {
     });
 
     $('.menu li').click(function(e) {
+        if (!e) e = window.event;
+        e.stopPropagation();
+        if ($(this).find('ul').length) {
+            $(this).toggleClass('toggle-sub');
+        } else {
+            $(this).parents('.toggle-sub').removeClass('toggle-sub');
+        }
+    });
+
+    $('.menu li#user').hover(function(e) {
         if (!e) e = window.event;
         e.stopPropagation();
         if ($(this).find('ul').length) {
@@ -291,38 +387,6 @@ $(document).ready(function() {
             query: feedID,
             max: 12
         });
-    });
-
-    // Image Sliders
-
-    $('.slider-all-controls').flexslider({});
-    $('.slider-paging-controls').flexslider({
-        animation: "slide",
-        directionNav: false
-    });
-    $('.slider-arrow-controls').flexslider({
-        controlNav: false
-    });
-    $('.slider-thumb-controls .slides li').each(function() {
-        var imgSrc = $(this).find('img').attr('src');
-        $(this).attr('data-thumb', imgSrc);
-    });
-    $('.slider-thumb-controls').flexslider({
-        animation: "slide",
-        controlNav: "thumbnails",
-        directionNav: true
-    });
-    $('.logo-carousel').flexslider({
-        minItems: 1,
-        maxItems: 4,
-        move: 1,
-        itemWidth: 200,
-        itemMargin: 0,
-        animation: "slide",
-        slideshow: true,
-        slideshowSpeed: 3000,
-        directionNav: false,
-        controlNav: false
     });
 
     // Lightbox gallery titles
@@ -547,7 +611,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $('.validate-required, .validate-email').on('blur change', function() {
+    $('.validate-required, .validate-email .validate-plate').on('blur change', function() {
         validateFields($(this).closest('form'));
     });
 
@@ -579,6 +643,15 @@ $(document).ready(function() {
 
             $(form).find('.validate-email').each(function() {
                 if (!(/(.+)@(.+){2,}\.(.+){2,}/.test($(this).val()))) {
+                    $(this).addClass('field-error');
+                    error = 1;
+                } else {
+                    $(this).removeClass('field-error');
+                }
+            });
+
+             $(form).find('.validate-plate').each(function() {
+                if (!(/^.{1,7}$/.test($(this).val()))) {
                     $(this).addClass('field-error');
                     error = 1;
                 } else {

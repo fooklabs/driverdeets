@@ -22,7 +22,7 @@
                             <h4 class="uppercase mb32" style="text-align:center;">Leave a Review</h4>
                             %= form_for 'review', class => 'form', id => 'review', 'data-success' => "Thanks for your submission.", => 'data-error' => "Please fill all fields correctly" => (method => 'post') => begin
                                 <div class="col-sm-6 col-sm-offset-3 mb16">
-                                   <input style="display: none;" id="example-color" type="number">
+                                   <input style="display: none;" id="rating" name="rating" type="number" required>
                                 </div>
                                 <div class="col-sm-12" style="padding-left:0">
                                 <div class="input-with-label text-left">
@@ -32,8 +32,8 @@
                                 <div class="halves">
                                     <div class="select-option">
                                         <i class="ti-angle-down"></i>
-                                        <select name="platestate">
-                                            <option selected="" value="Default">Select a State</option>
+                                        <select name="platestate" id="platestate" required>
+                                            <option selected="" value="" disabled>Select a State</option>
                                             <option value="alabama">Alabama</option>
                                             <option value="alaska">Alaska</option>
                                             <option value="arizona">Arizona</option>
@@ -87,7 +87,7 @@
                                             <option value="wyoming">Wyoming</option>
                                         </select>
                                     </div>
-                                    <input type="text" name="platenum" class="validate-required  signup-email-field" placeholder="License" />
+                                    <input type="text" name="platenum" id="platenum" data-validation="length" data-validation-length="max7" data-sanatize="upper" placeholder="License" required />
                                 </div>
                                 <div class="input-with-label text-left">
                                     <span>Where Did it Happen?</span>
@@ -95,8 +95,8 @@
                                 <div class="halves">
                                     <div class="select-option">
                                         <i class="ti-angle-down"></i>
-                                        <select name="wherestate">
-                                            <option selected="" value="Default">Select a State</option>
+                                        <select name="wherestate" id="wherestate" required>
+                                            <option selected="true" disabled="disabled">Select a State</option>
                                             <option value="alabama">Alabama</option>
                                             <option value="alaska">Alaska</option>
                                             <option value="arizona">Arizona</option>
@@ -150,9 +150,22 @@
                                             <option value="wyoming">Wyoming</option>
                                         </select>
                                     </div>
-                                    <input type="text" class="validate-required" id="wherecity" name="wherecity" placeholder="City" disabled />
+                                    <div class="select-option">
+                                        <i class="ti-angle-down"></i>
+                                        <select name="wherecity" id="wherecity" disabled required>
+                                            <option selected="true" disabled="disabled">Select a City</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <textarea class="validate-required" name="message" rows="4" placeholder="Message"></textarea>
+                                <textarea class="validate-required" name="message" rows="4" placeholder="Message" required></textarea>
+                                % if ( $error ) {
+                                    <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <strong><%= $error %></strong>
+                                    </div>
+                                % }
                                 <input type="submit" value="Submit Review" />
                             % end
                         </div>
@@ -163,7 +176,9 @@
             </section>
 % content_for javascript => begin
 <script type="text/javascript">
-$('#example-color').rating({
+
+
+    $('#rating').rating({
   color: '#999',
   colorHover: '#CF4656',
   size: '30px',
@@ -171,5 +186,32 @@ $('#example-color').rating({
   inline: true,
 });
 $('#wherecity').select2();
+$('#wherestate').on('change', function() {
+  // get cities
+  $('#wherecity').find('option')
+                .remove()
+                .end()
+                .append('<option selected="true" disabled="disabled">Select a City</option>');
+  $.getJSON('/cities/'+this.value, function(data) {
+    $.each(data, function(index) {
+      $('#wherecity').append($('<option>').text(data[index].name).attr('value', data[index].stub));
+    });
+  });
+  $('#wherecity').prop("disabled", false);
+});
+% if ( $type eq 'plate' ) {
+  $('#platestate').val("<%= $state %>");
+  $('#platenum').val("<%= $what %>");
+% }
+% if ( $type eq 'city' ) {
+  $('#wherestate').val("<%= $state %>");
+  $.getJSON('/cities/<%= $state %>', function(data) {
+    $.each(data, function(index) {
+      $('#wherecity').append($('<option>').text(data[index].name).attr('value', data[index].stub));
+    });
+  });
+  $('#wherecity').prop("disabled", false);
+  $('#wherecity').select2("val","<%= $what %>");
+% }
 </script>
 % end

@@ -13,6 +13,7 @@
         <link href="/css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
         <link href="/css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
         <link href="/css/font-license.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/dropit.css" rel="stylesheet" type="text/css" media="all" />
         <link href="/css/theme-gunmetal.css" rel="stylesheet" type="text/css" media="all" />
         <link href="/css/custom.css" rel="stylesheet" type="text/css" media="all" />
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -52,17 +53,15 @@
 
                     <div class="module-group right" style="width:90%;">
                         % if ( session('login') ) {
-                        <div class="module widget-handle left" style="width:70%;">
+                        <div class="module widget-handle left" style="width:64%;">
                         % } else {
                         <div class="module widget-handle left" style="width:60%;">
                         % }
-                            % if ( url_for('current') ne '/' ) {
-                             <form class="search-form quarters">
-
+                          <form id="goForm" class="search-form quarters">
                                     <div class="select-option">
                                         <i class="ti-angle-down"></i>
-                                        <select name="platestate">
-                                            <option selected="" value="Default">Select a State</option>
+                                        <select name="state" id="state" required>
+                                            <option selected="" value="" disabled>Select a State</option>
                                             <option value="alabama">Alabama</option>
                                             <option value="alaska">Alaska</option>
                                             <option value="arizona">Arizona</option>
@@ -116,10 +115,9 @@
                                             <option value="wyoming">Wyoming</option>
                                         </select>
                                     </div>
-                                    <input type="text" placeholder="License Plate" />
-                                    <a class="btn btn-sm btn-tropical" href="/register">Go There</a>
-                                </form>
-                                % }
+                                    <input type="text" placeholder="License Plate" name="plate" id="plate" data-validation-length="max7" data-sanatize="upper" />
+                                    <input type="submit" class="btn btn-sm btn-tropical no-border" value="Go There" />
+                                  </form>
                         </div>
                         <!--end of menu module-->
                         <div class="module widget-menu left">
@@ -135,47 +133,47 @@
                                                     <span class="title">West</span>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/alaska">
+                                                    <a href="/list/us/alaska">
                                                         Alaska</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/california">
+                                                    <a href="/list/us/california">
                                                         California</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/colorado">
+                                                    <a href="/list/us/colorado">
                                                         Colorado</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/hawaii">
+                                                    <a href="/list/us/hawaii">
                                                         Hawaii</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/idaho">
+                                                    <a href="/list/us/idaho">
                                                         Idaho</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/montana">
+                                                    <a href="/list/us/montana">
                                                         Montana</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/nevada">
+                                                    <a href="/list/us/nevada">
                                                         Nevada</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/oregon">
+                                                    <a href="/list/us/oregon">
                                                         Oregon</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/utah">
+                                                    <a href="/list/us/utah">
                                                         Utah</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/washington">
+                                                    <a href="/list/us/washington">
                                                         Washington</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/wyoming">
+                                                    <a href="/list/us/wyoming">
                                                         Wyoming</a>
                                                 </li>
                                             </ul>
@@ -186,51 +184,51 @@
                                                     <span class="title">Midwest</span>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/illinois">
+                                                    <a href="/list/us/illinois">
                                                         Illinois</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/indiana">
+                                                    <a href="/list/us/indiana">
                                                         Indiana</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/iowa">
+                                                    <a href="/list/us/iowa">
                                                         Iowa</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/kansas">
+                                                    <a href="/list/us/kansas">
                                                         Kansas</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/michigan">
+                                                    <a href="/list/us/michigan">
                                                         Michigan</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/minnesota">
+                                                    <a href="/list/us/minnesota">
                                                         Minnesota</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/missouri">
+                                                    <a href="/list/us/missouri">
                                                         Missouri</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/nebraska">
+                                                    <a href="/list/us/nebraska">
                                                         Nebraska</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/north-dakota">
+                                                    <a href="/list/us/north-dakota">
                                                         North Dakota</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/ohio">
+                                                    <a href="/list/us/ohio">
                                                         Ohio</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/south-dakota">
+                                                    <a href="/list/us/south-dakota">
                                                         South Dakota</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/wisconsin">
+                                                    <a href="/list/us/wisconsin">
                                                         Wisconsin</a>
                                                 </li>
                                             </ul>
@@ -241,19 +239,19 @@
                                                     <span class="title">Southwest</span>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/arizona">
+                                                    <a href="/list/us/arizona">
                                                         Arizona</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/new-mexico">
+                                                    <a href="/list/us/new-mexico">
                                                         New Mexico</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/oklahoma">
+                                                    <a href="/list/us/oklahoma">
                                                         Oklahoma</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/texas">
+                                                    <a href="/list/us/texas">
                                                         Texas</a>
                                                 </li>
 
@@ -265,51 +263,51 @@
                                                     <span class="title">Southeast</span>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/alabama">
+                                                    <a href="/list/us/alabama">
                                                         Alabama</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/arkansas">
+                                                    <a href="/list/us/arkansas">
                                                         Arkansas</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/florida">
+                                                    <a href="/list/us/florida">
                                                         Florida</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/georgia">
+                                                    <a href="/list/us/georgia">
                                                         Georgia</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/kentucky">
+                                                    <a href="/list/us/kentucky">
                                                         Kentucky</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/louisiana">
+                                                    <a href="/list/us/louisiana">
                                                         Louisiana</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/mississippi">
+                                                    <a href="/list/us/mississippi">
                                                         Mississippi</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/north-carolina">
+                                                    <a href="/list/us/north-carolina">
                                                         North Carolina</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/south-carolina">
+                                                    <a href="/list/us/south-carolina">
                                                         South Carolina</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/tennessee">
+                                                    <a href="/list/us/tennessee">
                                                         Tennessee</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/virginia">
+                                                    <a href="/list/us/virginia">
                                                         Virginia</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/west-virginia">
+                                                    <a href="/list/us/west-virginia">
                                                         West Virginia</a>
                                                 </li>
                                             </ul>
@@ -320,86 +318,69 @@
                                                     <span class="title">Northeast</span>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/connecticut">
+                                                    <a href="/list/us/connecticut">
                                                         Connecticut</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/deleware">
+                                                    <a href="/list/us/deleware">
                                                         Deleware</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/maine">
+                                                    <a href="/list/us/maine">
                                                         Maine</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/maryland">
+                                                    <a href="/list/us/maryland">
                                                         Maryland</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/massachusetts">
+                                                    <a href="/list/us/massachusetts">
                                                         Massachusetts</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/new-hampshire">
+                                                    <a href="/list/us/new-hampshire">
                                                         New Hampshire</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/new-jersey">
+                                                    <a href="/list/us/new-jersey">
                                                         New Jersey</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/new-york">
+                                                    <a href="/list/us/new-york">
                                                         New York</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/pennsylvania">
+                                                    <a href="/list/us/pennsylvania">
                                                         Pennsylvania</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/rhode-island">
+                                                    <a href="/list/us/rhode-island">
                                                         Rhode Island</a>
                                                 </li>
                                                 <li>
-                                                    <a href="/us/vermont">
+                                                    <a href="/list/us/vermont">
                                                         Vermont</a>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="has-dropdown">
-                                    <a href="#">
-                                        Stuff
+                                <li>
+                                    <a href="/review">
+                                        Review
                                     </a>
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                About Us
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Blog
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Feature Request
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Contact
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
 
                             </ul>
                         </div>
-                        <div class="module widget-handle right">
+                        <div class="module widget-handle left">
                           % if ( session('login') ) {
-                            <i class="ti ti-user"></i> <%= session('login') %>
+                            <ul class="make-right menu">
+                            <li><a href="/user/<%= session('login') %>"><i class="ti ti-user"></i></a>
+                            <li><a href="/messages"><i class="ti ti-email"></i></a>
+                            <li><a href="/settings"><i class="ti ti-settings"></i></a>
+                            <li><a href="/logout"><i class="ti ti-shift-right"></i></a></li>
+                            </ul>
                           % } else {
                             <a class="btn btn-sm btn-filled" href="/register">Sign Up</a>
                             <a class="btn btn-sm" href="/login">Sign In</a>
@@ -419,26 +400,17 @@
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="widget">
-                                <h6 class="title">Recent Posts</h6>
+                                <h6 class="title">Recent Reviews</h6>
                                 <hr>
                                 <ul class="link-list recent-posts">
                                     <li>
-                                        <a href="#">Hugging pugs is super trendy</a>
-                                        <span class="date">February
-                                            <span class="number">14, 2015</span>
-                                        </span>
+                                        <a href="#">Oregon - FCK-GWR</a>
                                     </li>
                                     <li>
-                                        <a href="#">Spinning vinyl is oh so cool</a>
-                                        <span class="date">February
-                                            <span class="number">9, 2015</span>
-                                        </span>
+                                        <a href="#">Alaska - BLA-BLAH</a>
                                     </li>
                                     <li>
-                                        <a href="#">Superior theme design by pros</a>
-                                        <span class="date">January
-                                            <span class="number">27, 2015</span>
-                                        </span>
+                                        <a href="#">California - ASS-HOLE</a>
                                     </li>
                                 </ul>
                             </div>
@@ -457,11 +429,11 @@
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="widget">
-                                <h6 class="title">Instagram</h6>
+                                <h6 class="title">About Fook Labs</h6>
                                 <hr>
-                                <div class="instafeed" data-user-name="funsizeco">
-                                    <ul></ul>
-                                </div>
+                                <p>
+                                I started Fook Labs out of a passion for creating things. I'm throwing things at the wall, if something happens to be well-liked, that's awesome. And maybe one day I get rich. Who knows? Now, stop reading this and go listen to some Leonard Cohen. Relax.
+                                </p>
                             </div>
                             <!--end of widget-->
                         </div>
@@ -474,23 +446,13 @@
                         <div class="col-sm-6 text-right">
                             <ul class="list-inline social-list">
                                 <li>
-                                    <a href="#">
+                                    <a href="https://twitter.com/fooklabs" target="_blank">
                                         <i class="ti-twitter-alt"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="https://www.facebook.com/fooklabs" target="_blank">
                                         <i class="ti-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-dribbble"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-vimeo-alt"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -503,7 +465,6 @@
         </div>
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/flexslider.min.js"></script>
         <script src="/js/lightbox.min.js"></script>
         <script src="/js/masonry.min.js"></script>
         <script src="/js/twitterfetcher.min.js"></script>
@@ -511,11 +472,26 @@
         <script src="/js/ytplayer.min.js"></script>
         <script src="/js/countdown.min.js"></script>
         <script src="/js/smooth-scroll.min.js"></script>
-        <script src="/js/parallax.js"></script>
         <script src="/js/select2.min.js"></script>
         <script src="/js/scripts.js"></script>
         <script src="/js/tipi.js"></script>
         <script src="/js/rating.js"></script>
+        <script src="/js/dropit.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.8/jquery.form-validator.min.js"></script>
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $('#goForm').submit( function() {
+              if ( $('#plate').val() ) {
+                goUrl = '/plate/us/' + $('#state').val() + '/' + $('#plate').val().toUpperCase();
+              }
+              else {
+                goUrl = '/list/us/' + $('#state').val();
+              }
+              window.location = goUrl;
+              return false;  // Prevent the default form behaviour
+            });
+          });
+        </script>
         <%= content 'javascript' %>
     </body>
 </html>

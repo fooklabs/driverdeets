@@ -55,7 +55,6 @@
             this.value = $el.val() ? parseInt($el.val(), 10) : 0;
 
             $el.on('change', function () {
-              console.log('change!');
               var val = (+$el.val());
               self.value = val;
               highlightStars(val);
@@ -100,7 +99,7 @@
             $starsContainer = $('<div class="stars" />');
 
             for(i = 1; i <= 5; i++) {
-                if ( Math.floor($el.val()) == i && isFloat(i - $el.val()) ) {
+                if ( Math.floor($el.val()) + 1 == i && isFloat(i - $el.val()) ) {
                     star = $('<i rating-value="' + i + '" class="fa ' + self.settings.icon + ' halfish" />');
                 }
                 else {

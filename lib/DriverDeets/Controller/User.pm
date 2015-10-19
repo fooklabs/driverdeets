@@ -10,18 +10,25 @@ sub login {
 
   my $login    = $c->param('login');
   my $password = $c->param('password');
+  my $from = $c->param('from');
 
-  if ($c->session('login')) {
-    return $c->redirect_to('index');
-  }
   if ($c->req->method ne 'POST') {
-    return $c->render(template => 'user/login');
+    if ( $c->session('login') and $c->req->headers->referrer !~ /login/ ) {
+      return $c->redirect_to($c->req->headers->referrer)
+    }
+    elsif ( $c->session('login') ) {
+      return $c->redirect_to('index')
+    }
+    else {
+      my $url = $c->flash('url') // $c->req->headers->referrer;
+      return $c->render(template => 'user/login', url => $url);
+    }
   }
   if ( $c->authenticate( $login, $password ) ) {
-    $c->redirect_to('index');
+    return $c->redirect_to($from);
   }
 
-  $c->render(template => 'user/login', error => 'invalid credentials');
+  $c->render(template => 'user/login', error => 'invalid credentials', url => $from);
 }
 
 sub register {
@@ -32,41 +39,43 @@ sub register {
     return $c->redirect_to('index');
   }
   if ($c->req->method ne 'POST') {
-    return $c->render(template => 'user/register');
+    return $c->render(template => 'user/register', url => $c->req->headers->referrer, error => '');
   }
 
-  $validation->required('login')->like(qr/^\w+$/)->size(1, 15);
+  $validation->required('register_login')->like(qr/^\w+$/)->size(1, 15);
   $validation->required('repassword')->equal_to('password');
   $validation->required('password')->size(1, 255);
   $validation->optional('email')->size(1, 255);
   $validation->optional('plates')->size(1,10);
   $validation->optional('states');
+  $validation->optional('from');
   my $output = $validation->output;
-  print Dumper $output;
-  $output->{login} = lc($output->{login});
+  $output->{register_login} = lc($output->{register_login});
   $output->{email} = lc($output->{email}) if $output->{email};
 
   my $email = Email::Valid->address($output->{email}) if $output->{email};
 
-  $validation->error(email => ['invalid email'])
+  my $error;
+  $validation->error(email => ['invalid email']) and $error = 'invalid email'
     if $output->{email} and !$email;
 
-  $validation->error(password => 'passwords do not match')
+  $validation->error(password => 'passwords do not match') and $error = 'passwords do not match'
     if $output->{password} ne $output->{repassword};
 
-  $validation->error(login => ['not available'])
-    if $c->schema->resultset('User')->find({login => $output->{login}});
+  $validation->error(login => ['not available']) and $error = 'login not available'
+    if $c->schema->resultset('User')->find({login => $output->{register_login}});
 
   return $c->render(
     template => 'user/register',
-    error => $validation,
-    status => 400
+    error => $error,
+    status => 400,
+    url => $c->req->headers->referrer
   ) if $validation->has_error;
 
 
 
   my $user = $c->schema->resultset('User')->create({
-    login    => $output->{login},
+    login    => $output->{register_login},
     password => $c->bcrypt($output->{password}),
     email    => $output->{email}
   });
@@ -77,13 +86,14 @@ sub register {
       for (@{$output->{plates}}) {
         $index++ and next unless $output->{states}->[$index];
 
+        my $plate = uc $output->{plates}->[$index];
         my $region = $c->schema->resultset('Region')->find({
           region => $output->{states}->[$index]
         });
         $index++ and next unless $region;
 
         my $plate = $c->schema->resultset('Plate')->create({
-          plate => $output->{plates}->[$index],
+          plate => $plate,
           region_id => $region->region_id
         });
         $c->schema->resultset('UsersPlate')->create({
@@ -97,9 +107,9 @@ sub register {
       my $region = $c->schema->resultset('Region')->find({
         region => $output->{states}
       });
-
+      my $plate = uc $output->{plates};
       my $plate = $c->schema->resultset('Plate')->create({
-        plate => $output->{plates},
+        plate => $plate,
         region_id => $region->region_id
       });
       $c->schema->resultset('UsersPlate')->create({
@@ -110,7 +120,8 @@ sub register {
   }
 
   if ( $c->authenticate( $user->login, $output->{password} ) ) {
-    return $c->redirect_to('index');
+    my $url = $c->flash('url') // $output->{from};
+    return $c->redirect_to($url);
   }
   $c->redirect_to('register');
 }
@@ -121,72 +132,91 @@ sub logout {
   $c->session(login => undef);
   $c->redirect_to('index');
 }
+
 sub check_login {
   my $c = shift;
-  my $db = $c->pg->db;
-  my $login = $c->param('reglogin');
+  my $login = $c->param('login');
 
-  my $result = $db->query(
-    '
-      select login from "user" where login = ?
-    ',$login,
-  )->hash;
+  my $result = $c->schema->resultset('User')->find({
+    login => $login
+  });
 
-  if ( $result->{login} ) {
-    return $c->render(text => '<span class="smallest color" id="user-result">username not available</span>');
+  if ( $result ) {
+    return $c->render(text => 'false');
   }
   else {
-    return $c->render(text => '<span class="smallest success" id="user-result">username is available</span>');
+    return $c->render(text => 'true');
   }
 }
-# sub view {
-#   my $c = shift;
-#   my $db = $c->pg->db;
 
-#   my $login = $c->param('login');
-#   if ( $c->session('login') eq $login ) {
+sub view {
+  my $c = shift;
+  my $user  = lc $c->param('user');
 
-#     # Grab their posts
-#     my $posts = $db->query('
-#       select
-#         post_uuid,
-#         title,
-#         slug,
-#         upvotes,
-#         array_agg(post_to_topic.topic) AS topics
-#       from post
-#       left join post_to_topic on post.post_id=post_to_topic.post
-#       where login = ?
-#       GROUP BY post.post_id
-#       order by created desc limit 20
-#     ');
 
-#     # Grab subscribed topics
+  $c->session( referer => $c->current_route );
+  my $review_rs = $c->schema->resultset('Review')->search(
+    { 'user.login' => $user },
+    { join      => 'user',
+      '+select' => ['user.login', 'user.user_id'],
+      '+as'     => ['user.login', 'user.user_id'],
+      prefetch => [
+        { 'city'  => { 'metro' => 'region' } },
+        { 'plate' => 'region' },
+      ],
+    }
+  );
+  $review_rs->result_class('DBIx::Class::ResultClass::HashRefInflator');
+  $review_rs = [ $review_rs->all ];
 
-#     # Grab liked posts
+  # print Dumper $review_rs;
+  $c->render(
+    user => $user,
+    reviews => $review_rs,
+  );
+}
 
-#   }
-#   my $posts = $db->query(
-#     'select a.post_uuid,a.title,a.created,b.topic from post a
-#      join post_to_topic b on a.post_id=b.post_id
-#      where login = ? and public and published order by created',
-#     $login
-#   )->hash;
-#     my $links = $db->query(
-#       'select a.link_uuid,a.title,a.url,a.created,b.topic from link a
-#        join link_to_topic b on a.link_id=b.link_id
-#        where login = ? order by created',
-#       $login
-#     )->hash;
-#     my $books = $db->query(
-#       'select book_uuid,name,created from book
-#       where login = ? and public',
-#       $login
-#     );
-#     $c->render(posts => $posts, links => $links, books => $books);
-#   } catch {
-#     #$c->render(error)
-#   }
-# }
+sub messages {
+  my $c = shift;
+  my $user  = $c->session('id');
+
+
+  my $review_rs = $c->schema->resultset('Review')->search(
+    { 'user.user_id' => $user },
+    {
+      prefetch => [
+        { 'city'  => { 'metro' => 'region' } },
+        { 'plate' => { 'users_plates' => 'user' } },
+      ],
+    }
+  );
+  $review_rs->result_class('DBIx::Class::ResultClass::HashRefInflator');
+  $review_rs = [ $review_rs->all ];
+
+  print Dumper $review_rs;
+  my $login = $c->session('login');
+  $c->render(
+    login => $login,
+    reviews => $review_rs,
+  );
+}
+
+sub settings {
+  my $c = shift;
+  my $user = $c->session('id');
+
+  my $plate_rs = $c->schema->resultset('Plate')->search(
+    { 'users_plates.user_id' => $user },
+    {
+      prefetch => [
+        { 'users_plates' => 'user' },
+        { 'region' },
+      ],
+    },
+  );
+  $plate_rs->result_class('DBIx::Class::ResultClass::HashRefInflator');
+  $plate_rs = [ $plate_rs->all ];
+  $c->render(plates => $plate_rs);
+}
 
 1;

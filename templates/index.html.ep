@@ -17,11 +17,11 @@
                     <!--end of row-->
                     <div class="row mb80 mb-xs-24">
                         <div class="col-sm-10 col-sm-offset-1">
-                            %= form_for '/plate/find', class => 'thirds', id => 'view', => (method => 'post') => begin
+                            <form id="homeForm" class="thirds">
                                 <div class="select-option">
                                     <i class="ti-angle-down"></i>
-                                    <select name="region">
-                                        <option selected="" value="Default">Select a State</option>
+                                    <select name="region" id="homeState" required>
+                                        <option selected="" value="" disabled>Select a State</option>
                                         <option value="alabama">Alabama</option>
                                         <option value="alaska">Alaska</option>
                                         <option value="arizona">Arizona</option>
@@ -75,10 +75,9 @@
                                         <option value="wyoming">Wyoming</option>
                                     </select>
                                 </div>
-                                <input type="text" name="plate" class="signup-email-field" placeholder="License" />
-                                <input type="hidden" name="country" value="us" />
+                                <input type="text" name="plate" class="signup-email-field" id="homePlate" placeholder="License" />
                                 <input type="submit" class="btn-white btn-tropical" value="Go" />
-                            % end
+                            </form>
                         </div>
                     </div>
                     <!--end of row-->
@@ -149,3 +148,14 @@
                 </div>
                 <!--end of container-->
             </section>
+% content_for javascript => begin
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#homeForm').submit( function() {
+      goUrl = '/plate/us/' + $('#homeState').val() + '/' + $('#homePlate').val().toUpperCase();
+      window.location = goUrl;
+      return false;  // Prevent the default form behaviour
+    });
+  });
+</script>
+% end

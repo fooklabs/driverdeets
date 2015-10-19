@@ -28,58 +28,93 @@
         </style>
 % end
 <div class="main-container">
-            <section class="pb0">
-                <div class="container">
+            <section class="page-title page-title-2 plate-bg">
+            <div class="container">
                     <div class="row">
                         <div class="col-sm-5" align="center">
-                        <div class="bg-img" style="background: url('/img/plates/<%= $region %>.jpg') no-repeat; background-size: 100% auto; vertical-align:middle;">
-                                <h2 class="uppercase plate-lg"><%= $plate %></h2>
-                            </div>
+                          <div class="bg-img" style="background: url('/img/plates/<%= $region %>.jpg') no-repeat; background-size: 100% auto; vertical-align:middle;">
+                            <h2 class="uppercase plate-lg"><%= $plate %></h2>
+                          </div>
                         </div>
                         <div class="col-sm-7" align="right">
-                        <div class="btn-group">
-                        <a class="btn btn-lg btn-filled mb32" href="#">Write a Review</a>
-                        <div><input style="display: none;" id="example-color" type="number" value="4.5"><h4>906 Reviews</h4></div>
-
+                          <div class="btn-group">
+                            <a class="btn btn-lg btn-filled mb32" href="/review/plate/<%= $region %>/<%= $plate %>">Write a Review</a>
+                            <div><input style="display: none;" id="overall-rating" type="number" value="<%= $average %>"><h4><%= $review_total %></h4></div>
+                            <div class="similar">
+                              <h5 class="mb0">Similar Plates</h5>
+                              % for ( @{$similar} ) {
+                                <a href="/plate/us/<%= $region %>/<%= $_->{plate} %>"><%= $_->{plate} %></a>
+                              % }
+                            </div>
+                          </div>
                         </div>
-                    </div>
+                      </div>
+                      </section>
+                      <section>
+                      <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
                             <h4 class="uppercase mb32" style="text-align:right;">Reviews</h4>
                             <hr>
                         </div>
-                    </div>
+                      </div>
                     % if ( @{$reviews} ) {
                     % for ( @{$reviews} ) {
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="feature feature-3 feature-4 mb32">
-                                <div class="left">
-                                    <div class="mb16"><input style="display: none;" id="example-color2" type="number" value="4" /></div>
-                                    <a href="#" class="review"><%= $_->{user_id} %></a><br />
-                                    <h5 class="mb0"><a href="#" class="review"><%= $_->{city}->{city} %>, <%= uc $_->{city}->{region}->{abbr} %></a></h5>
-                                    <h5>16 Reviews</h5>
+                              <div class="left" style="width:15%;margin-right:5%;">
+                                    <div class="mb0">
+                                      <input style="display: none;" class="review-rating" type="number" value="<%= $_->{rating} %>" />
+                                    </div>
+                                    <a href="/us/<%= $_->{city}->{region}->{stub} %>/city/<%= $_->{city}->{stub} %>" class="review"><%= $_->{city}->{city} %>, <%= uc $_->{city}->{region}->{abbr} %></a><br />
+                                    <a href="/user/<%= $_->{user}->{login} %>" class="review"><%= $_->{user}->{login} %></a><br />
+                                    <%= $_->{user}->{count} %> Reviews
                                 </div>
-                                <div class="right">
+                                <div class="right" style="width:75%;">
                                     <p>
                                         <%= $_->{body} %>
                                     </p>
                                 </div>
                             </div>
-                            <div class="mb64" style="text-align:right; border-bottom: 1px solid #000">
-                                <a class="btn btn-sm funny-selected" href="#">
-                                    <span class="fontelico-emo-laugh"></span> Funny <span style="text-align:right; font-size:14px;"><%= $_->{funny} %></span>
-                                </a>
-                                <a class="btn btn-sm useful-selected" href="#">
-                                    <span class="fontelico-emo-beer"></span> Useful <span style="text-align:right; font-size:14px;"> <%= $_->{useful} %></span>
-                                </a>
-                                <a class="btn btn-sm mean-selected" href="#">
-                                    <span class="fontelico-emo-devil"></span> Mean <span style="text-align:right; font-size:14px;"> <%= $_->{mean} %></span>
-                                </a>
-                                <a class="btn btn-sm nice-selected" href="#">
-                                    <span class="fontelico-emo-saint"></span> Nice <span style="text-align:right; font-size:14px;"> <%= $_->{nice} %></span>
-                                </a>
-                            </div>
+                    <div style="text-align:left;margin-left:20%;" id="<%= $_->{review_id} %>">
+                        % if ( $_->{vote}->{funny} ) {
+                            <a class="btn btn-sm btn-vote funny" id="funny">
+                        % } else {
+                            <a class="btn btn-sm btn-vote" id="funny">
+                        % }
+
+                            <span class="fontelico-emo-laugh"></span> Funny <span class="votenum" style="text-align:right; font-size:14px;"> <%= $_->{funny} %></span>
+                        </a>
+                        % if ( $_->{vote}->{useful} ) {
+                            <a class="btn btn-sm btn-vote useful" id="useful">
+                        % } else {
+                            <a class="btn btn-sm btn-vote" id="useful">
+                        % }
+                            <span class="fontelico-emo-beer"></span> Useful <span class="votenum" style="text-align:right; font-size:14px;"> <%= $_->{useful} %></span>
+                        </a>
+                        % if ( $_->{vote}->{mean} ) {
+                            <a class="btn btn-sm btn-vote mean" id="mean">
+                        % } elsif ( $_->{vote}->{nice} ) {
+                            <a class="btn btn-sm btn-vote disabled" id="mean">
+                        % } else {
+                            <a class="btn btn-sm btn-vote" id="mean">
+                        % }
+                            <span class="fontelico-emo-devil"></span> Mean <span class="votenum" style="text-align:right; font-size:14px;"> <%= $_->{mean} %></span>
+                        </a>
+                        % if ( $_->{vote}->{nice} ) {
+                            <a class="btn btn-sm btn-vote nice" id="nice">
+                        % } elsif ( $_->{vote}->{mean} ) {
+                            <a class="btn btn-sm btn-vote disabled" id="nice">
+                        % } else {
+                            <a class="btn btn-sm btn-vote" id="nice">
+                        % }
+                            <span class="fontelico-emo-saint"></span> Nice <span class="votenum" style="text-align:right; font-size:14px;"> <%= $_->{nice} %></span>
+                        </a>
+                    </div>
+                    <div class="mb64" style="border-bottom: 1px solid #000">
+
+                    </div>
                         </div>
                     </div>
                     <!--end of row-->
@@ -87,7 +122,7 @@
                     % } else {
                         <div class="row">
                             <div class="col-sm-12 mb64">
-                                <h5>This plate doesn't have any reviews. Why not leave one?</h5>
+                                <h3 class="text-center">This plate doesn't have any reviews yet. Why not <a href="/review/<%= $region %>/<%= $plate %>">add the first one</a>?</h3>
                             </div>
                         </div>
                     % }
@@ -97,7 +132,7 @@
             </section>
 % content_for javascript => begin
 <script type="text/javascript">
-$('#example-color').rating({
+$('#overall-rating').rating({
   color: '#999',
   colorHover: '#CF4656',
   size: '30px',
@@ -105,7 +140,7 @@ $('#example-color').rating({
   inline: true,
   disabled: true,
 });
-$('#example-color2').rating({
+$('.review-rating').rating({
   color: '#999',
   colorHover: '#CF4656',
   showLabel: false,

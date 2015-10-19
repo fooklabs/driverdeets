@@ -1,0 +1,17 @@
+%layout 'default';
+
+       <div class="main-container">
+            <section class="fullscreen">
+                <div class="container v-align-transform">
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <div class="text-center">
+                                <span class="fontelico-emo-displeased icon icon-lg mb64 mb-xs-0"></span>
+                                <h1 class="large"><%= $error %></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>

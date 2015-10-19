@@ -7,6 +7,7 @@ use Mojolicious::Plugin::Bcrypt;
 use Mojolicious::Plugin::Authentication;
 use Mojo::Util qw(md5_sum);
 
+
 has db => sub {
   my $self = shift;
   my $schema_class = $self->config->{db_schema} or die "Unknown DB Schema Class";
@@ -56,7 +57,7 @@ sub startup {
       return $user if $user;
     },
     validate_user => sub {
-      my ( $self, $login, $password ) = @_;
+      my ( $self, $login, $password, $route ) = @_;
 
       my $user = $self->schema->resultset('User')->single({ login => $login });
       return unless $user;
@@ -86,27 +87,38 @@ sub startup {
   # Register / login / logout
   $r->any('/register')->to('user#register')->name('register');
   $r->any('/login')->to('user#login')->name('login');
-
-  $r->post('/vote/:review/:what/:type')->to('review#vote');
-  $r->post('/plate/find')->to('plate#view');
+  $r->any('/user/:user')->to('user#view');
   $r->get('/cities/:region')->to('region#cities');
-  $r->get('/:country/:region/plate/:plate')->to('plate#view')->name('view');
-  $r->get('/:country/:region/:type/:name')->to(
+  $r->get('/plate/:country/:region/:plate')->to('plate#view')->name('view');
+  $r->get('/list/:country/:region/:type/:name')->to(
     'region#list',
     type => 'state',
     name => 'state',
   )->name('list');
-
-
-
-  $r->any('/review')->to('plate#review')->name('review');
-  $r->any('/search')->to('plates#search')->name('search');
-
+  $r->post('/check_login')->to('user#check_login');
   my $auth = $r->under('/' => sub {
     my $self = shift;
+    $self->flash(url => $self->req->url);
     $self->redirect_to('/login') and return 0 unless($self->is_user_authenticated);
     return 1;
   });
+
+  $auth->any('/review/:type/:state/:what')->to(
+    'review#create',
+    type => '',
+    state => '',
+    what => '',
+  )->name('review');
+  $auth->post('/vote/:review/:what/:type')->to('review#vote');
+  $auth->get('/messages')->to('user#messages');
+  $auth->get('/settings')->to('user#settings');
+  $auth->get('/logout')->to(cb => sub {
+    my $c =  shift;
+    $c->logout;
+    $c->redirect_to('index');
+  });
+
+
 
   # Authed can do the following:
   # Write reviews
